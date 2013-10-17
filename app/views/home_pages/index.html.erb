@@ -1,4 +1,4 @@
-<div class="bucket-container container">
+<div class="measure-summary-container container">
 	<%
 			# Initailize content
 			performance_image_path = "performance_bucket.png"
@@ -29,10 +29,10 @@
 			content: productivity_content, image_path: productivity_image_path }
 	%>	
 
-	<%= render partial: 'bucket', locals: performance_bucket %>
-	<%= render partial: 'bucket', locals: restoration_bucket %>
-	<%= render partial: 'bucket', locals: longevity_bucket %>
-	<%= render partial: 'bucket', locals: productivity_bucket %>
+	<%= render partial: 'measure_summary_bucket', locals: performance_bucket %>
+	<%= render partial: 'measure_summary_bucket', locals: restoration_bucket %>
+	<%= render partial: 'measure_summary_bucket', locals: longevity_bucket %>
+	<%= render partial: 'measure_summary_bucket', locals: productivity_bucket %>
 
 </div>
 <div class="homeostasis-container container">
@@ -78,16 +78,17 @@
 			content: connective_tissue_content, image_path: connective_tissue_image_path	}
 		oxidative_stress_homeostasis = { title: "Oxidative Stress Control",
 			content: oxidative_stress_content, image_path: oxidative_stress_image_path	}
+
+		homeostasis_summaries = [ph_homeostasis, aerobic_homeostasis, 
+			calcium_phosphate_homeostasis, protein_homeostasis, inflammation_homeostasis, 
+			connective_tissue_homeostasis, oxidative_stress_homeostasis]
+	
 	%>
 
-	<div class="heostasis-summary-container">
-		<%= render partial: 'homeostasis', locals: ph_homeostasis %>
-		<%= render partial: 'homeostasis', locals: aerobic_homeostasis  %>
-		<%= render partial: 'homeostasis', locals: calcium_phosphate_homeostasis %>
-		<%= render partial: 'homeostasis', locals: protein_homeostasis %>
-		<%= render partial: 'homeostasis', locals: inflammation_homeostasis %>
-		<%= render partial: 'homeostasis', locals: connective_tissue_homeostasis%>
-		<%= render partial: 'homeostasis', locals: oxidative_stress_homeostasis %>
+	<div class="homeostasis-summary-container">
+		<% homeostasis_summaries.each do |locals|%>
+			<%= render partial: 'homeostasis_summary_bucket', locals: locals %>
+		<% end %>
 	</div>
 
 </div>
