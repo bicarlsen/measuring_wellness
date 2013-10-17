@@ -1,0 +1,19 @@
+<div class="homeostasis summary">
+	<div class="homeostasis-image image-summary">
+		<%= image_tag "homeostasis_images/" + image_path %>
+	</div>
+	<div class="homeostasis-content-container summary-container container">
+		<div class="homeostasis-title summary-title">
+			<%= title %>
+		</div>
+		<div class="homeostasis-content summary-content">
+			<%= content %>
+		</div>
+		<div class="homeostasis-link summary-link">
+			<% link = "homeostasis#" + title.delete(' ') %>
+			<%= link_to "Learn More", link %>
+		</div>
+	</div>
+</div>
+
+
