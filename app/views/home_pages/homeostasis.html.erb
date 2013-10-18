@@ -1,0 +1,60 @@
+<div class="homeostasis-container">
+<%
+	# Initialize content
+	extra_content = <<-eos
+		Lorem ipsum dolor sit amet, 
+		consectetur adipisicing elit, sed do eiusmod tempor 
+		incididunt ut labore et dolore magna aliqua. 
+		Ut enim ad minim veniam, quis nostrud 		   
+		exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+		Duis aute irure dolor in reprehenderit in voluptate velit esse 
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
+		proident, sunt in culpa qui officia
+		deserunt mollit anim id est laborum.
+	eos
+
+	ph_content = "Measuring performance - " + extra_content*2
+
+	aerobic_content = "Measuring restoration - " + extra_content*2
+
+	calcium_phosphate_content = "Measuring longevity - " + extra_content*2
+
+	protein_content = "Measuring productivity - " + extra_content*2
+
+	inflammation_content = "Healthy Inflammation - " + extra_content*2
+
+	connective_tissue_content = "Connective Tissue Integrity - " + extra_content*2
+
+	oxidative_stress_content = "Oxidative Stress Control - " + extra_content*2
+
+	# Initialize local variables
+	ph = { title: "pH Balance", content: ph_content }
+	aerobic = { title: "Aerobic Metabolism", content: aerobic_content }
+	calcium_phosphate = 	{ title: "Calcium Phosphate Balance", 
+		content: calcium_phosphate_content }
+	protein = { title: "Protein Metabolism", content: protein_content }
+	inflammation = { title: "Healthy Inflammation", content: inflammation_content }
+	connective_tissue = { title: "Connective Tissue Integrity", 
+		content: connective_tissue_content }
+	oxidative_stress = { title: "Oxidative Stress Controll",
+		content: oxidative_stress_content }
+	
+	homeostasis = [ph, aerobic, calcium_phosphate, inflammation, connective_tissue,
+		oxidative_stress]
+
+%>
+
+<% homeostasis.each do |locals| %> 
+	<a id="<%= locals[:title].delete ' ' %>">
+	<%= render partial: 'homeostasis_bucket', locals: locals %>
+	</a>
+<% end %>
+
+
+
+
+
+
+
+
+

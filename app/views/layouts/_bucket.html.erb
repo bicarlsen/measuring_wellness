@@ -1,6 +1,9 @@
 <div class="<%= bucket_type %>-bucket bucket">
 	<div class="bucket-image image-container container">
-		<%= image_tag "bucket_images/" + image_path %>
+		<% 
+			image ||= title.downcase.gsub(/\s/, '_') + ".png"
+		%>
+		<%= image_tag "bucket_images/" + image %>
 	</div>
 	<div class="bucket-content-container content-container container">
 		<div class="bucket-title title">
@@ -8,10 +11,12 @@
 		</div>
 		<div class="bucket-content content">
 			<%= content %>
-		</div>
+		</div>		
 		<div class="bucket-link-container link-container container">
-			<% link = "measures#" + title.delete(' ') %>
-			<%= link_to "Learn More", link %>
+			<% if defined? link_base
+						link = "#{link_base}##{title.delete(' ')}" %>
+				<%= link_to "Learn More", link %>
+			<% end %>
 		</div>
 	</div>
 </div>

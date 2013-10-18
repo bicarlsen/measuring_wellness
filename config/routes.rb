@@ -1,7 +1,8 @@
 MeasuringWellness::Application.routes.draw do
 
  root 'home_pages#index'	
- 
+ match 'measures', to: 'home_pages#measures', via: 'get'
+ match 'homeostasis', to: 'home_pages#homeostasis', via: 'get'
 
 
 	# The priority is based upon order of creation: first created -> highest priority.

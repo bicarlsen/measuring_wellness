@@ -20,14 +20,14 @@
 
 		# Initialize local variable for partial
 		performance_bucket = { title: "Measuring Performance",
-			content: performance_content, image_path: performance_image_path }
+			content: performance_content, image: performance_image_path }
 		restoration_bucket = { title: "Meauring Restoration",
-			content: restoration_content, image_path: restoration_image_path	}
+			content: restoration_content, image: restoration_image_path	}
 		longevity_bucket = { title: "Meauring Longevity",
-			content: longevity_content, image_path: longevity_image_path	}
+			content: longevity_content, image: longevity_image_path	}
 		productivity_bucket = { title: "Measuring Productivity",
-			content: productivity_content, image_path: productivity_image_path }
-	%>	
+			content: productivity_content, image: productivity_image_path }
+%>	
 
 	<%= render partial: 'measure_summary_bucket', locals: performance_bucket %>
 	<%= render partial: 'measure_summary_bucket', locals: restoration_bucket %>
