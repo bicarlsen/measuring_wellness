@@ -58,7 +58,7 @@ a {
 		border-radius: 5px;
 		margin: 3px;
 
-		&:hover &:active {
+		&:hover, &:active {
 			border-color: $primary-color;
 		}
 
@@ -191,7 +191,7 @@ a {
 
 				border-radius: 3px;
 
-				&:hover &:active {
+				&:hover, &:active {
 					background-color: $tertiary-color;
 				}
 
