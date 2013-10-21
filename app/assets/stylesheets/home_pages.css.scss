@@ -58,23 +58,28 @@ a {
 		border-radius: 5px;
 		margin: 3px;
 
-		&:hover {
-			cursor: pointer;
+		&:hover &:active {
 			border-color: $primary-color;
 		}
 
-		&:active {
-			border-color: $primary-color;
+		&:hover {
+			cursor: pointer;
 		}
 
 	} // end .bucket-link
 } // end .bucket
 
+
+
+//-------------- HOME PAGE ----------------------
+
 // Measure
 .measure-summary-bucket {
+	position: relative; // Used to anchor link to bottom
+
 	display: inline-block;
 	width: 250px; // slightly wider than image
-	height: 475px;
+	height: 450px;
 	float: left;
 
 	// Image
@@ -94,44 +99,110 @@ a {
 
 	// Content
 	.bucket-content {
-
+		padding: 0px 7%;
 	}
 
 	// Link
-	.bucket-link {
+	.bucket-link-container {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
 		margin-bottom: 5px;
 
-		display: inline-block;
-		vertical-align: bottom;
+		text-align: center;
+
+		.bucket-link {
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+		}
 	}
 } // end .measure-summary-bucket
 
 // Homeostasis
 .homeostasis-container {
 	clear: both;
+
+	padding: 2.5em 1em 1.5em 1em;
+
+	h1 {
+		padding-left: 3%;
+
+		font-size: 2em;
+	}
 }
 
 .homeostasis-summary-bucket {
 	clear: both;
 	
+	// Image
 	.bucket-image {
 		float: left;
+		margin: 3px 7px 3px 3px;
 	}
 
-}
+	// Content
+	.bucket-content {
+		width: 60%;
+	}
+
+	// Link
+	.bucket-link-container {
+		width: 60%;
+		clear: both;
+
+		.bucket-link {
+			margin-left: 80%;
+		}
+	}
+} // end .homeostasis-summary-bucket
 
 
-//----------- HOME PAGE ---------------------
 
-
-//---------- MEASURES --------------------
-
-
-
-//------------ HOMEOSTASIS ----------------
+//---------- MEASURES PAGE--------------------
 
 
 
+//------------ HOMEOSTASIS PAGE ----------------
+
+
+//----------- NAVIGATION -----------------------
+.navigation {
+	background-color: $primary-color;
+	border-bottom: solid 0.15em $secondary-color;
+
+	ul {
+		padding: 3px 15px;
+		margin: 0px 0px 7px 0px;
+		background-color: $primary-color;
+
+		list-style-type: none;
+
+		li {
+			display: inline-block;
+			margin: 0.1em 3em;
+			background-color: $primary-color;
+
+			a {
+				padding: .2em .5em;
+
+				color: $secondary-color;
+				text-decoration: none;
+
+				border-radius: 3px;
+
+				&:hover &:active {
+					background-color: $tertiary-color;
+				}
+
+				&:hover {
+					cursor: pointer;
+				}
+
+			} // end a
+		} // end li
+	} // end ul
+} // end .nvaigation
 
 
 //-------------- HEADER ------------------
