@@ -1,3 +1,171 @@
 // Place all the styles related to the HomePages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+//--------- INCLUDES ---------
+@import 'site_variables';
+
+
+//---------- UNIVERSAL ---------------------
+
+html {
+
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	
+	font-family: $font-stack;
+}
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.title {
+	font-weight: bold;
+	font-size: 125%;
+}
+
+
+// Bucket
+.bucket {
+	padding: 5px;
+ 	padding-bottom: 7px;	
+	margin: 3px;
+
+	// Bucket Title
+	.bucket-title {
+		font-size: 115%;
+	}
+
+	// Bucket Content
+	.bucket-content {
+		padding: 3px;
+		margin: 5px;
+	}
+
+	// Bucket Link
+	.bucket-link {
+		background-color: $primary-color;
+		color: $secondary-color;
+
+		padding: 3px 5px;
+		border: solid medium $secondary-color;	
+		border-radius: 5px;
+		margin: 3px;
+
+		&:hover {
+			cursor: pointer;
+			border-color: $primary-color;
+		}
+
+		&:active {
+			border-color: $primary-color;
+		}
+
+	} // end .bucket-link
+} // end .bucket
+
+// Measure
+.measure-summary-bucket {
+	display: inline-block;
+	width: 250px; // slightly wider than image
+	height: 475px;
+	float: left;
+
+	// Image
+	.bucket-image-container {
+		width: 100%;
+	}
+	.bucket-image {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	// Title
+	.bucket-title {
+		text-align: center;
+	}
+
+	// Content
+	.bucket-content {
+
+	}
+
+	// Link
+	.bucket-link {
+		margin-bottom: 5px;
+
+		display: inline-block;
+		vertical-align: bottom;
+	}
+} // end .measure-summary-bucket
+
+// Homeostasis
+.homeostasis-container {
+	clear: both;
+}
+
+.homeostasis-summary-bucket {
+	clear: both;
+	
+	.bucket-image {
+		float: left;
+	}
+
+}
+
+
+//----------- HOME PAGE ---------------------
+
+
+//---------- MEASURES --------------------
+
+
+
+//------------ HOMEOSTASIS ----------------
+
+
+
+
+
+//-------------- HEADER ------------------
+.logo-container {
+	padding: 7px 10px;
+	width: 100%;
+
+	background-color: $primary-color;
+
+}
+
+
+//------------ FOOTER -----------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
