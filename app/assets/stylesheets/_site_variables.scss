@@ -2,15 +2,35 @@
 
 
 // colors
+/*
+Color Scheme 1
+
 $kelp: #484E32;
 $yuma: #CAC37F;
 $tan: #D1B37F;
 $peach: #E9D6C5;
+*/
 
-$primary-color: $kelp;
-$secondary-color: $peach;
-$tertiary-color: $tan;
-$quaternary-color: $yuma;
+/*
+Color Scheme 2
+*/
+$pale-blue-4: #D1ECFF; // palest
+$pale-blue-3: #CEE5F6;
+$pale-blue-2: #C7D5FF;
+$pale-blue: #BEE5FF;
+
+$light-grey: #9FA7B4;
+$dark-grey: #5A4A42;
+
+
+// Color definitions
+$primary-color: $pale-blue;
+$secondary-color: $pale-blue-2;
+$tertiary-color: $pale-blue-3;
+$quaternary-color: $pale-blue-4;
+
+$primary-text-color: $dark-grey;
+$secondary-text-color: $light-grey;
 
 // fonts
 $font-stack: sans-serif
