@@ -198,13 +198,13 @@ a {
 			a {
 				padding: .2em .5em;
 
-				color: $secondary-color;
+				color: $primary-text-color;
 				text-decoration: none;
 
 				border-radius: 3px;
 
 				&:hover, &:active {
-					background-color: $tertiary-color;
+					text-decoration: underline;
 				}
 
 				&:hover {
