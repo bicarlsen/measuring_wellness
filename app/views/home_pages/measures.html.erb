@@ -1,5 +1,3 @@
-<%= render partial: 'navigation' %>
-
 <div class="measure-container">
 <%
 	# Initialize content
@@ -30,16 +28,16 @@
 	productivity = { title: "Measuring Productivity", content: productivity_content }
 
 %>
-<a id="MeasuringPerformance">
+<a id="MeasuringPerformance" class='anchor-link'></a>
 <%= render partial: 'measure_bucket', locals: performance %>
 </a>
-<a id="MeasuringRestoration">
+<a id="MeasuringRestoration" class='anchor-link'></a>
 <%= render partial: 'measure_bucket', locals: restoration %>
 </a>
-<a id="MeasuringLongevity">
+<a id="MeasuringLongevity" class='anchor-link'></a>
 <%= render partial: 'measure_bucket', locals: longevity %>
 </a>
-<a id="MeasuringProductivity">
+<a id="MeasuringProductivity" class='anchor-link'></a>
 <%= render partial: 'measure_bucket', locals: productivity %>
 </a>
 </div>

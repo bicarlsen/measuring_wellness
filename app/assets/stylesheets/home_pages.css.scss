@@ -5,7 +5,7 @@
 
 //--------- INCLUDES ---------
 @import 'site_variables';
-
+@import 'mixins';
 
 //---------- UNIVERSAL ---------------------
 
@@ -13,12 +13,7 @@ body {
 	color: $primary-text-color;
 	font-family: $font-stack;
 
-	min-width: 800px;
-}
-
-a {
-	text-decoration: none;
-	font-weight: bold;
+	@include radial-gradient-background(white, $quaternary-color);
 }
 
 .title {
@@ -53,14 +48,6 @@ a {
 		border: solid 2px $secondary-color;	
 		border-radius: 5px;
 		margin: 3px;
-
-		&:hover, &:active {
-			text-decoration: underline;
-		}
-
-		&:hover {
-			cursor: pointer;
-		}
 
 	} // end .bucket-link
 } // end .bucket
@@ -117,7 +104,6 @@ a {
 
 // Homeostasis
 .homeostasis-container {
-	min-width: 800px;
 	clear: both;
 
 	padding: 2.5em 1em 1.5em 1em;
@@ -129,53 +115,70 @@ a {
 	}
 }
 
-.homeostasis-summary-bucket {
-	clear: both;
+.homeostasis-summary-container {
+	margin-right: auto;
+	margin-left: auto;
 	
-	margin-top: 0;
-	margin-bottom: 0;
-	padding-top: 1.5em;
-	padding-left: 3em;
-	border: solid 2px $secondary-color;
-	border-radius: 4px;
-
-	
-	&:nth-child(even) {
-		background-color: $tertiary-color;
-	}
-	&:nth-child(odd) {
-		background-color: $quaternary-color;
-	}
-
-	// Image
-	.bucket-image {
-		float: left;
-		margin: 3px 10px 3px 3px;
-	}
-
-	// Content
-	.bucket-content {
-		width: 60%;
-	}
-
-	// Link
-	.bucket-link-container {
-		width: 60%;
+	.homeostasis-summary-bucket {
 		clear: both;
-
-		.bucket-link {
-			margin-left: 80%;
+		
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-top: 1.5em;
+		padding-left: 3em;
+		border: solid 2px $secondary-color;
+		border-radius: 4px;
+		
+		&:nth-child(even) {
+			background-color: $tertiary-color;
 		}
-	}
-} // end .homeostasis-summary-bucket
+		&:nth-child(odd) {
+			background-color: $quaternary-color;
+		}
 
+		// Image
+		.bucket-image {
+			float: left;
+			margin-right: 1.5em;
+		}
+
+		// Content
+		.bucket-content {
+			width: 70%;
+		}
+
+		// Link
+		.bucket-link-container {
+			margin-bottom: 0.5em;
+			width: 100%;
+			clear: both;
+			
+			text-align: right;
+
+			.bucket-link {
+				margin-right: 5em;
+			}
+		}
+	} // end .homeostasis-summary-bucket
+} // end .homeostais-summary-container
 
 
 //---------- MEASURES PAGE--------------------
+.measure-bucket {
+	padding: 1.5em 2em 2em 2em;
+	border-radius: 5px;
 
+	background-color: $secondary-color;
+}
 
 
 //------------ HOMEOSTASIS PAGE ----------------
+.homeostasis-bucket {
+	padding: 1.5em 2em 2em 2em;
+	border-radius: 5px;
+	
+	background-color: $quaternary-color;
+}
 
 
 //----------- NAVIGATION -----------------------
@@ -199,18 +202,6 @@ a {
 				padding: .2em .5em;
 
 				color: $primary-text-color;
-				text-decoration: none;
-
-				border-radius: 3px;
-
-				&:hover, &:active {
-					text-decoration: underline;
-				}
-
-				&:hover {
-					cursor: pointer;
-				}
-
 			} // end a
 		} // end li
 	} // end ul

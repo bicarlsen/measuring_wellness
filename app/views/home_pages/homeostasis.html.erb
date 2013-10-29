@@ -1,5 +1,3 @@
-<%= render partial: 'navigation' %>
-
 <div class="homeostasis-container">
 <%
 	# Initialize content
@@ -47,9 +45,8 @@
 %>
 
 <% homeostasis.each do |locals| %> 
-	<a id="<%= locals[:title].delete ' ' %>">
+	<a id="<%= locals[:title].delete ' ' %>" class='anchor-link'></a>
 	<%= render partial: 'homeostasis_bucket', locals: locals %>
-	</a>
 <% end %>
 
 
