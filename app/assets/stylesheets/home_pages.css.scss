@@ -18,7 +18,7 @@ body {
 
 .title {
 	font-weight: bold;
-	font-size: 125%;
+	font-size: 2em;
 }
 
 
@@ -62,11 +62,12 @@ body {
 
 	display: inline-block;
 	width: 250px; // slightly wider than image
-	height: 450px;
+	height: 350px;
 	float: left;
 
 	// Image
 	.bucket-image-container {
+		margin-bottom: 0.3em;
 		width: 100%;
 	}
 	.bucket-image {
@@ -102,6 +103,12 @@ body {
 	}
 } // end .measure-summary-bucket
 
+// About Us Blurb
+.about-us {
+	padding: 2em 3em 0em 3em;
+	clear: both;
+}
+
 // Homeostasis
 .homeostasis-container {
 	clear: both;
@@ -110,8 +117,6 @@ body {
 
 	h1 {
 		padding-left: 3%;
-
-		font-size: 2em;
 	}
 }
 
@@ -173,6 +178,10 @@ body {
 
 
 //------------ HOMEOSTASIS PAGE ----------------
+.homeostasis-description {
+	margin-bottom: 0.75em;
+}
+
 .homeostasis-bucket {
 	padding: 1.5em 2em 2em 2em;
 	border-radius: 5px;
@@ -217,6 +226,9 @@ body {
 
 	background-color: $primary-color;
 
+	.site-logo-image {
+		margin-left: 1em;
+	}
 }
 
 
