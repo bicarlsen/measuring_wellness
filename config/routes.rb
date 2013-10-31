@@ -1,9 +1,9 @@
 MeasuringWellness::Application.routes.draw do
 
- root 'home_pages#index'	
- match 'measures', to: 'home_pages#measures', via: 'get'
- match 'homeostasis', to: 'home_pages#homeostasis', via: 'get'
-
+ 	root 'home_pages#index'	
+ 	match 'measures', to: 'home_pages#measures', via: 'get'
+ 	match 'homeostasis', to: 'home_pages#homeostasis', via: 'get'
+ 	match 'science', to: 'home_pages#science', via: 'get'
 
 	# The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

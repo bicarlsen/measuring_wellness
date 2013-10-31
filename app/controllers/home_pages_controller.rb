@@ -8,4 +8,7 @@ class HomePagesController < ApplicationController
 	def homeostasis
 	end
 
+	def science
+	end
+
 end
