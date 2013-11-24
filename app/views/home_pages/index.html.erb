@@ -40,12 +40,41 @@
 	<h1 class='title'>
 		What We Do
 	</h1>
-	
-	This will be a short blurb about us.
-	It should be an interesting paragraph that highlights what is unique about 
-		the measures and/or process.
-	It should entice the reader to learn more about the process and delve deeper 
-		into the site.
+	<p>
+		So your not ill, but how “well” are you.  
+		The degree of wellness can me measured.  
+		Measuring Wellness™ offers a proprietary analysis of basic 
+			laboratory blood chemistry that uncovers subtle imbalances in your health.  
+		Your metabolism is a sophisticated equilibrium that operates optimally 
+			when your blood chemistry is maintained within narrow ranges.  
+		When analytes deviate from these narrow ranges they become “subclinical defects”.  
+		We call them “subclinical” because they are not clinically 
+			recognized by western medicine to be defective.  
+		The symptoms of these imbalances are initially subtle best described 
+			by feeling suboptimal.  
+		However, if left untreated through simple lifestyle, 
+			dietary and supplementation, the subclinical defects progress 
+			into full-blown illness.  
+		</p>
+		<p>
+			Recognizing that your body and its metabolism are like 
+				performance sports cars is the first big step toward wellness.  
+			You have the best performance and longevity with the correct maintenance.
+		</p>
+		<p>
+			Measuring Wellness starts with you having blood drawn at your local laboratory.  
+			The laboratory performs a custom analysis on your blood.  
+			Measuring Wellness receives the results from the laboratory and 
+				performs the proprietary analysis.  
+			A customized treatment plan, based on your analysis, 
+				is developed specifically for you.  
+			You follow the lifestyle, dietary, and supplementation guidance 
+				that the treatment plan advocates.  
+			You feel better and your health improves.
+		</p>
+		<p>
+			It’s that simple.
+		</p>
 </div>
 
 <div class="homeostasis-container container">
@@ -55,26 +84,98 @@
 	
 	<%
 		# Initialize content
-		ph_image_path = "ph_balance.png"
-		ph_content = "pH balance is important"
+		ph_image_path = "ph_balance.jpg"
+		ph_content = <<-eof
+			The body works very, very hard to control the amount of acid. 
+			Acid is measured and discussed in terms of pH. 
+			The ideal pH of the body has been scientifically determined to be 7.4. 
+			The body works very hard to maintain itself as close to that level as possible. 
+			All of clinical chemistry is based on this concept of pH and its ideal level. 
+			Acid is controlled by compounds that are alkaline. 
+			The process is called buffering.
+		eof
 
-		aerobic_image_path = "aerobic_metabolism.png"
-		aerobic_content = "aerobic meatabolism is important"
+		aerobic_image_path = "aerobic_metabolism.jpg"
+		aerobic_content = <<-eof
+			The body prefers to make energy using oxygen. 
+			This is called Aerobic Metabolism.  
+			It is the most efficient method of creating energy from foods. 
+			You get a much higher return (you make MORE high energy phosphate bonds, ATP) 
+				when things are done aerobically. 
+			However, the body has the capacity to make energy without oxygen. 
+			This is called Anaerobic Metabolism. 
+			It is much less efficient. 
+			Put it this way, anaerobic metabolism is in the neighborhood of 
+				5-6 times less efficient than aerobic metabolism. 
+			Would you rather make $35 or $5 on an investment? 
+			It is a ‘no brainer’ for the body.														
+		eof
 
-		calcium_phosphate_image_path = "calcium_phosphate_balance.png"
-		calcium_phosphate_content = "calcium phosphate balcance is important"
+		calcium_phosphate_image_path = "calcium_phosphate_balance.jpg"
+		calcium_phosphate_content = <<-eof
+			Calcium balance is absolutely crucial for your health and wellness. 
+			Calcium is the only mineral that has its very own glandular 
+				system devoted to maintaining its balance: the parathyroid glands. 
+			Why is the balance of calcium so important? 
+			We mostly think of calcium in terms of bone loss as we age 
+				and with arthritis or coronary artery calcification. 
+			Yet, every muscle contraction and every nerve impulse in your 
+				body depends totally on the proper calcium physiology.
+		eof
 
 		protein_image_path = "protein_metabolism.png"
-		protein_content = "protein content is important"
+		protein_content = <<-eof
+			Your body is literally held together by a web of protein.  
+			Proteins are constructed from amino acids.  
+			The supply of amino acids in the body is tightly regulated and monitored.  
+			Your body demands that you have a certain level of amino acids available 
+				for the synthesis of new proteins.  
+			Amino acids come from two sources: diet and the recycling of 
+				worn out proteins in the body.
+		eof
 
 		inflammation_image_path = "inflammation.png"
-		inflammation_content = "healthy inflamation is important"
+		inflammation_content = <<-eof
+			Inflammation is above all a health maintenance process. 
+			Its study occupies the whole area of medicine known as immunology. 
+			It cannot be measured directly by a single specific laboratory test, 
+				but is viewed through many different parameters, 
+				much like looking at the US economy through various economic indicators. 
+			The higher the levels of the various indicators, 
+				the more inflammation the body struggles to control. 
+			There are 14 parameters of inflammation, 
+				and they must be looked at as a package.
+		eof
 
 		connective_tissue_image_path = "connective_tissue_integrity.png"
-		connective_tissue_content = "connective tissue integrity is important"
+		connective_tissue_content = <<-eof
+			Connective tissues connect the body together. 
+			Healthy connective tissue reflects in smooth skin, strong muscles, 
+				strong bone matrix, and healthy amounts of cartilage in joints. 
+			It is an unappreciated property of youth and, 
+				usually is not appreciated fully until it is gone. 
+			Healthy connective tissue is the focus of much, if not most, 
+				of the “anti-aging” health promotion. 
+			Plastic surgery, joint replacements, and literally hundreds of 
+				magic creams all promise the hope of the vibrant return of 
+				healthy connective tissue. 
+			As is usual in most things health-related, 
+				an ounce of prevention is worth a pound of cure if preservation 
+				or restoration of healthy connective tissue is your goal.
+		eof
 
 		oxidative_stress_image_path = "oxidative_stress.png"
-		oxidative_stress_content = "oxidative stress control is important"
+		oxidative_stress_content = <<-eof
+			Oxidative Stress can be likened to ‘biological rusting’. 
+			Oxidative stress is part of life, all life. 
+			It is the process that causes us to age. 
+			It involves one molecule taking an electron (oxidation) from another molecule. 
+			It happens literally billions of times every second in your body. 
+			When a molecule loses one of its electrons, 
+				this changes the chemistry and shape of the molecule, 
+				and therefore can alter its function. 
+			How does our body deal with this?
+		eof
 	
 		# Initialize local variables for partial
 		ph_homeostasis = { title: "Acid/Base Balance",

@@ -142,28 +142,40 @@ body {
 		}
 
 		// Image
-		.bucket-image {
-			float: left;
-			margin-right: 1.5em;
+		.bucket-image-container {
+			vertical-align: top;
+			display: inline-block;
+			
+			margin: 2.5em 1.5em 0 0;
+			width: 12%;
+
+			.bucket-image {
+				width: 100%;
+			}
 		}
 
 		// Content
-		.bucket-content {
-			width: 70%;
-		}
-
-		// Link
-		.bucket-link-container {
-			margin-bottom: 0.5em;
-			width: 100%;
-			clear: both;
+		.bucket-content-container {
+			display: inline-block;
+			width: 80%;
 			
-			text-align: right;
-
-			.bucket-link {
-				margin-right: 5em;
+			.bucket-content {
+				//width: 70%;
 			}
-		}
+
+			// Link
+			.bucket-link-container {
+				margin-bottom: 0.5em;
+				width: 100%;
+				clear: both;
+				
+				text-align: right;
+
+				.bucket-link {
+					margin-right: 5em;
+				}
+			}
+		} // .bucket-content-container
 	} // end .homeostasis-summary-bucket
 } // end .homeostais-summary-container
 
