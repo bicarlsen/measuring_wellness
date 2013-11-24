@@ -9,43 +9,348 @@
 	
 <%
 	# Initialize content
-	extra_content = <<-eos
-		Lorem ipsum dolor sit amet, 
-		consectetur adipisicing elit, sed do eiusmod tempor 
-		incididunt ut labore et dolore magna aliqua. 
-		Ut enim ad minim veniam, quis nostrud 		   
-		exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-		Duis aute irure dolor in reprehenderit in voluptate velit esse 
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
-		proident, sunt in culpa qui officia
-		deserunt mollit anim id est laborum.
-	eos
+	ph_content = <<-eof
+		<p>
+			The body works very, very hard to control the amount of acid. 
+			Acid is measured and discussed in terms of pH. 
+			The ideal pH of the body has been scientifically determined to be 7.4. 
+			The body works very hard to maintain itself as close to that level as possible. 
+			All of clinical chemistry is based on this concept of pH and its ideal level. 
+			Acid is controlled by compounds that are alkaline. 
+			The process is called buffering.
+		</p>
+		<p>
+			Acid stress worsens just about everything. 
+			It promotes calcification; worsens inflammation; promotes oxidative stress; 
+				creates anaerobic metabolism; and destabilizes connective tissues. 
+			Every disease process increases the acid stress in the body, 
+				and increased acid stress promotes the emergence and continuity of disease. 
+			Infections and cancer both like an acid environment. 
+			Proteins denature and do not function well in an acid environment. 
+			Poor food choices can certainly promote acid stress.  
+			However, it is more often the presence of toxins in the system 
+				that creates ongoing acid day after day.
+		</p>
+		<p>
+			The body has 7 different mechanisms to help keep pH balanced. 
+			These are all reflected in blood chemistry. 
+			By analyzing the blood chemistry a physician can know which of the 
+				7 buffering mechanisms are struggling and need support. 
+			Depending on the severity, interventions can occur.
+		</p>
+		<p>
+			Correcting acid stress is frequently done in relative silence. 
+			This means that you may not notice any obvious difference in 
+				symptoms or in your body. 
+			However, your chemistry is a very sensitive indicator of your 
+				success in controlling the tendency to become more acid. 
+			Said another way, uncorrected acid stress is the foundation of aging. 
+			Correcting and maintaining an ideal pH would then be the 
+				foundation of any anti-aging approach to wellness and health. 
+			Bottom line, every other health maintenance process is made better 
+				by monitoring and correcting acid stress.
+		</p>
+	eof
 
-	ph_content = "Measuring performance - " + extra_content*2
+	aerobic_content = <<-eof
+		<p>
+			The body prefers to make energy using oxygen. 
+			This is called Aerobic Metabolism.  
+			It is the most efficient method of creating energy from foods. 
+			You get a much higher return (you make MORE high energy phosphate bonds, ATP) 
+				when things are done aerobically. 
+			However, the body has the capacity to make energy without oxygen. 
+			This is called Anaerobic Metabolism. 
+			It is much less efficient. 
+			Put it this way, anaerobic metabolism is in the neighborhood of 
+				5-6 times less efficient than aerobic metabolism. 
+			Would you rather make $35 or $5 on an investment? 
+			It is a ‘no brainer’ for the body.
+		</p>
+		<p>
+			However, there are times when the body has trouble being totally aerobic, 
+				and there are blood parameters that can reflect this. 
+				There are diseases that like things to be more anaerobic, cancer for instance. 
+			All infectious diseases like relatively more anaerobic conditions as 
+				the body cannot defend itself as well. 
+			There are also certain vitamin and mineral deficiencies that 
+				promote anaerobic conditions. 
+			All of these can be measured, followed, and frequently corrected.
+		</p>
+		<p>
+			Anaerobic conditions are promoted by acidosis, inflammation, and oxidative stress.  
+			Thus, if blood parameters suggest that there is a struggle with being aerobic, 
+				one can influence this situation by correcting acid stress, 
+				balancing the inflammatory process, and reducing toxicity and oxidative stress. 
+			Your success and progress will then be reflected in subsequent blood chemistries, 
+				and your treatment/maintenance plan will change accordingly.
+		</p>
+		<p>
+			You learn how to be more in control of your own health. 
+			You learn the best maintenance program for you as an individual. 
+			You can follow your personal state of balance for the rest of your life!
+		</p>
+	eof
 
-	aerobic_content = "Measuring restoration - " + extra_content*2
+	calcium_phosphate_content = <<-eof
+		<p>
+			Calcium balance is absolutely crucial for your health and wellness. 
+			Calcium is the only mineral that has its very own glandular system 
+				devoted to maintaining its balance: the parathyroid glands. 
+			Why is the balance of calcium so important? 
+			We mostly think of calcium in terms of bone loss as we age and with 
+				arthritis or coronary artery calcification. 
+			Yet, every muscle contraction and every nerve impulse in your body 
+				depends totally on the proper calcium physiology.
+		</p>
+		<p>
+			Calcium exists either bound to proteins or as ionized 
+				(free/non-protein bound) calcium. 
+			Think of it like most of the calcium rides on a bus (protein bound) 
+				while the rest of the calcium walks as a pedestrian (free). 
+			It is kept in a tight ratio. 
+			Calcium also depends on phosphate, and the proper ratio of calcium:phosphate 
+				in the blood is 1:2.5. 
+				Thus, if the ideal calcium is 10.0, the ideal phosphate level is 4.0.
+		</p>
+		<p>
+			Information is delivered to the cells via calcium that can enter cells 
+				through special doors on the cell membrane. 
+			If you have too much calcium things can get overcrowded, 
+				and the opposite problem occurs if there is too little calcium. 
+			The other interesting thing about calcium is that it is the body’s 
+				band-aid for chronic inflammation. 
+			Chronic inflammation creates destruction of connective tissues, 
+				and the body responds by depositing calcium to try and 
+				strengthen the tissue. 
+			This is what happens in arthritic joints and inflamed coronary arteries.
+		</p>
+		<p>
+			It is important not to over supplement with calcium. 
+			As long as the ratio of calcium to phosphate is balanced, 
+				it is safe to supplement with calcium. 
+			However, if phosphate is deficient or low 
+				(this occurs in states of extreme acid stress), 
+				you need to be very careful with supplementing calcium. 
+			Over-supplementation of calcium could lead to an excess of ionized 
+				(free) calcium, and that can tend to promote tissue deposition of calcium.
+		</p>
+	eof
 
-	calcium_phosphate_content = "Measuring longevity - " + extra_content*2
+	protein_content = <<-eof
+		<p>
+			Your body is literally held together by a web of protein.  
+			Proteins are constructed from amino acids.  
+			The supply of amino acids in the body is tightly regulated and monitored.  
+			Your body demands that you have a certain level of amino acids available 
+				for the synthesis of new proteins.  
+			Amino acids come from two sources: diet and the recycling of worn out 
+				proteins in the body.
+		</p>
+		<p>
+			Most people thing that they will be protein deficient only i
+				n they do not eat enough protein.  
+			Consequently, if they eat enough protein they must have adequate protein. 
+			However, what if they cannot digest well or if they have inflammation 
+				in their intestines that prevents the absorption of the amino acids?  
+			If you have symptoms in your intestinal tract, 
+				you probably have problems with absorption.  
+			Diet accounts for 33% of you amino acid needs.
+		</p>
+		<p>
+			Recycling protein requires the presence of active protease enzymes.  
+			These enzymes unzip a worn out protein thereby releasing the 
+				amino acids back into the amino acid pool of the body.  
+			Toxins can negatively impact protease enzyme activity.  
+			This results in sluggish recycling and traps lots of proteins in a kind of 
+				never-never land where they cannot be used.  
+			Recycling accounts for 66% of the amino acids in the body’s amino acids pool.  
+		</p>
+		<p>
+			Your body has two very general types of proteins: structural and metabolic.  
+			The structural proteins give from and function to the physical body: 
+				they are the form-defining tissues of the body: 
+				bone matrix, cartilage, muscles, connective tissues, 
+				ligaments, fascia, and tendons.  
+			Metabolic proteins are how the body communicates with itself.  
+			They include nucleic acids, neurotransmitters, enzymes, and hormones.  
+			Deficits in amino acids will eventually lead to problems 
+				with all types of metabolic proteins.
+		</p>
+	eof
 
-	protein_content = "Measuring productivity - " + extra_content*2
+	inflammation_content = <<-eof
+		<p>
+			Inflammation is above all a health maintenance process. 
+			Its study occupies the whole area of medicine known as immunology. 
+			It cannot be measured directly by a single specific laboratory test, 
+				but is viewed through many different parameters, 
+				much like looking at the US economy through various economic indicators. 
+			The higher the levels of the various indicators, 
+				the more inflammation the body struggles to control. 
+			There are 14 parameters of inflammation, and they must be looked at as a package.
+		</p>
+		<p>
+			As a cornerstone process of both wellness and disease, 
+				inflammation is a physiological constant and serves 
+				4 major wellness functions: it repairs tissue; 
+				kills invading microbes of all types 
+				(viruses, bacteria, fungi, parasites, etc.); 
+				kills cancer cells; and helps eliminate toxins. 
+			In wellness, inflammation turns on, accomplishes its task, and then turns off. 
+			Its operation can be paralleled to that of an efficient road crew that 
+				is called out to fix a pothole. 
+			The crew comes, does the repair with minimal traffic disruption, and then leaves. 
+			In the body, inflammation turns on through well-known mechanisms 
+				(injury, infection, cancer, toxic exposure, etc.) 
+				and its presence is reflected in various laboratory tests. 
+			Some of these include WBC, ESR, CRP, LFT’s to name but a few.
+		</p>
+		<p>
+			Chronic inflammation is present in every disease. 
+			It is inflammation that is out of control, and does not turn off. 
+			Following our analogy, imagine an out-of-control highway department. 
+			It sends a crew to repair a large pothole. 
+			The crew arrives, sets up, and before it can make the repair and leave, 
+				the highway department sends more crews. 
+			Eventually there are so many crews working that traffic is not only disrupted, 
+				but the street may be closed altogether. 
+			Similarly, chronic, out-of-control inflammation spreads and 
+				increasingly disrupts bodily functions.
+		</p>
+		<p>
+			Chronic inflammation causes increased acid stress; 
+				an increase in oxidative stress and free radical production; 
+				and connective tissue destruction. 
+			One of the responses to chronic inflammation is the deposition of 
+				calcium in tissues. 
+			This is done to reinforce the integrity and strength of the tissues. 
+			Inflammation can be controlled by bringing balance to the other 
+				functions that fuel this process – infections; acidosis; oxidative stress. 
+			Through the knowledge gleaned from laboratory testing, 
+				appropriate interventions can be identified to re-balance the system.
+		</p>
+	eof
 
-	inflammation_content = "Healthy Inflammation - " + extra_content*2
+	connective_tissue_content = <<-eof
+		<p>
+			Connective tissues connect the body together. 
+			Healthy connective tissue reflects in smooth skin, strong muscles, 
+				strong bone matrix, and healthy amounts of cartilage in joints. 
+			It is an unappreciated property of youth and, usually is not 
+				appreciated fully until it is gone. 
+			Healthy connective tissue is the focus of much, 
+				if not most, of the “anti-aging” health promotion. 
+			Plastic surgery, joint replacements, and literally hundreds of magic creams 
+				all promise the hope of the vibrant return of healthy connective tissue. 
+			As is usual in most things health-related, 
+				an ounce of prevention is worth a pound of cure 
+				if preservation or restoration of healthy connective tissue is your goal.
+		</p>
+		<p>
+			Connective tissues comprise a large branch of the structural 
+				proteins of the body. 
+			Composed of proteins, amino acids, and other compounds such as 
+				glucosamine and hyaluronic acid, 
+				their strength reflects the balance of bodily protein. 
+			Alternatively, imbalances in other basic physiologic processes will 
+				result in weakened connective tissues. 
+			Thus, increased acid stress, inflammation, toxicity, 
+				and anaerobic metabolism will all undermine the strength of 
+				the connective tissues.
+		</p>
+		<p>
+			Connective tissue that is infirm forms an atmosphere for latent 
+				bacterial infection. 
+			Small amounts of bacteria can survive in a latent state in 
+				connective tissue and cause smoldering destruction with the 
+				possibility of erupting into a larger ‘fire’ in the future. 
+			Weakened connective tissues mean a structurally weak body. 
+			One of the body’s major responses to structural weakness is to put down calcium. 
+			The calcium acts to strengthen tissues, 
+				like putting a structural reinforcement in a weakened building. 
+			And, the body uses protein from the connective tissues to supply 
+				amino acids in times of protein deficiency.
+		</p>
+		<p>
+			As with all of the homeostatic processes, 
+				there are multiple detectors that reflect the balance or 
+				imbalance of the connective tissues. 
+			Many of these are obvious such as X-rays and CT Scans. 
+			However, it is the more subtle parameters of chemistry that can 
+				warn an individual if their connective tissue is under attack.
+		</p>
+	eof
 
-	connective_tissue_content = "Connective Tissue Integrity - " + extra_content*2
-
-	oxidative_stress_content = "Oxidative Stress Control - " + extra_content*2
-
+	oxidative_stress_content = <<-eof
+		<p>
+			Oxidative Stress can be likened to ‘biological rusting’. 
+			Oxidative stress is part of life, all life. 
+			It is the process that causes us to age. 
+			It involves one molecule taking an electron (oxidation) from another molecule. 
+			It happens literally billions of times every second in your body. 
+			When a molecule loses one of its electrons, 
+				this changes the chemistry and shape of the molecule, 
+				and therefore can alter its function. 
+			How does our body deal with this?
+		</p>
+		<p>
+			Antioxidants can be thought of as floating bags of electrons. 
+			We get them in foods and in supplements. 
+			Different antioxidants are found in different environments within the body 
+				– vitamin E works in a different locale than does vitamin C. 
+			When a reaction of oxidation occurs, 
+				an antioxidant in the area can stop the damage by 
+				donating an electron to the molecule that just had its electron stolen. 
+			Think of it this way: oxidation is like having the pin pulled from 
+				a hand grenade, and then the antioxidants go and put the pin back 
+				into the grenade before it can blow up!
+		</p>
+		<p>
+			Oxidative stress is part of normal biology. 
+			It occurs with exercise; when making energy in every 
+				mitochondria in every cell; during digestion; from sunlight; 
+				and with many other processes. 
+			It is increased with exposure to toxins, increased inflammation, 
+				increased acidosis, and with every disease. 
+			The process of Oxidative Stress produces molecules called ‘Free Radicals’; 
+				they are special because they are missing electrons. 
+			They need the electrons to stabilize themselves and that is why 
+				they search for them, and the process of oxidation occurs.
+		</p>
+		<p>
+			When we are young, most of us have balanced oxidative stress. 
+			We have a lot of antioxidants to quiet the needs of the free radicals. 
+			As we age, and our exposure to toxins, infections, chemicals, etc. 
+				increases, our supply of antioxidants slowly cannot keep up with the demand. 
+			The oxidative stress in our bodies then begins to become dominant, 
+				and we age more quickly.
+		</p>
+		<p>
+			You can follow oxidative stress through blood chemistry. 
+			There are many parameters that reflect the strength of the 
+				oxidative stress in our body and our ability to control it. 
+			Controlling oxidative stress is the foundation of any serious anti-aging effort.  
+			However, as with all things biological, the key is balance. 
+			Measure the levels of your anti-oxidants. 
+			Measure the amount of the oxidative stress in your system.  
+			Find out how your individual body struggles, 
+				and then supply specifically what it needs.
+		</p>
+	eof
+	
 	# Initialize local variables
-	ph = { title: "pH Balance", content: ph_content }
-	aerobic = { title: "Aerobic Metabolism", content: aerobic_content }
+	ph = { title: "pH Balance", content: ph_content.html_safe }
+	aerobic = { title: "Aerobic Metabolism", content: aerobic_content.html_safe }
 	calcium_phosphate = 	{ title: "Calcium Phosphate Balance", 
-		content: calcium_phosphate_content }
-	protein = { title: "Protein Metabolism", content: protein_content }
-	inflammation = { title: "Healthy Inflammation", content: inflammation_content }
+		content: calcium_phosphate_content.html_safe }
+	protein = { title: "Protein Metabolism", content: protein_content.html_safe }
+	inflammation = { title: "Healthy Inflammation", 
+		content: inflammation_content.html_safe }
 	connective_tissue = { title: "Connective Tissue Integrity", 
-		content: connective_tissue_content }
+		content: connective_tissue_content.html_safe }
 	oxidative_stress = { title: "Oxidative Stress Control",
-		content: oxidative_stress_content }
+		content: oxidative_stress_content.html_safe }
 	
 	homeostasis = [ph, aerobic, calcium_phosphate, inflammation, connective_tissue,
 		oxidative_stress]

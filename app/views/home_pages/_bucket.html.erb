@@ -1,10 +1,13 @@
 <div class="<%= bucket_type %>-bucket bucket">
 	<div class="bucket-image-container image-container container">
 		<% 
-			image ||= title.downcase.gsub(/\s/, '_') + ".png"
+			#image ||= title.downcase.gsub(/\s/, '_') + ".png"
 		%>
-		<%= image_tag "bucket_images/" + image, class: "bucket-image" %>
+		<% if defined? image %>
+			<%= image_tag "bucket_images/" + image, class: "bucket-image" %>
+		<% end %>	
 	</div>
+
 	<div class="bucket-content-container content-container container">
 		<div class="bucket-title title">
 			<%= title %>
@@ -19,6 +22,7 @@
 			<% end %>
 		</div>
 	</div>
+
 </div>
 
 

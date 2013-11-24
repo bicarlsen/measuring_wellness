@@ -7,7 +7,7 @@
 		<p>
 			Just because you do not have a disease does not mean you are healthy.  
 			Wellness can me measured objectively.  
-			Measuring Wellness™ offers a unique analysis of common, 
+			Measuring Wellness™ offers a unique analysis of common. 
 			These dysfunctions appear before a disease develops.
 		</p>
 		<p>
@@ -49,25 +49,63 @@
 	
 <%
 	# Initialize content
-	extra_content = <<-eos
-		Lorem ipsum dolor sit amet, 
-		consectetur adipisicing elit, sed do eiusmod tempor 
-		incididunt ut labore et dolore magna aliqua. 
-		Ut enim ad minim veniam, quis nostrud 		   
-		exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-		Duis aute irure dolor in reprehenderit in voluptate velit esse 
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
-		proident, sunt in culpa qui officia
-		deserunt mollit anim id est laborum.
-	eos
+	performance_content = <<-eof 
+		Whether you are a Weekend warrior, enthusiast, amateur or professional athlete, 
+			you’ll perform at their best and get the most enjoyment from exercise 
+			if your health is optimized.  
+		When you hit the gym, road or trails, optimal health will give you the most 
+			from your workouts.  
+		Because your metabolism is finely tuned, 
+			you will get more benefit from less working out.  
+		Notice significant gains in performance simply by 
+			supporting your metabolism and you will feel better while 
+			you do the activities you enjoy.  
+		A single analyte deficiency or excess will influence your metabolism.  
+		Don’t let less-than-optimal health  prevent you from performing at your best.	 
+		Feel your best and maximize your gains.  Measure your Wellness."
+	eof
+	
+	restoration_content = <<-eof 
+		Busy lives distract us from ourselves.  
+		Years of self-sacrifice and personal neglect take a toll on our metabolism.  
+		Refocus some of your valuable time on you and take 
+			the first step towards restoring your youthful self.  
+		Rest assured that those surrounding you will be thankful, 
+			as they will see a new, invigorated you.  
+		Our diets, exposure to environmental toxins and numerous 
+			other factors gradually create imbalances in our metabolism.  
+		Balance is not difficult to restore, but it does require accurate measurement 
+			and our rededication to caring for ourselves.  
+		Simple lifestyle and dietary changes and supplementation are all that’s required.  
+		You owe it to yourself and those around us to ensure we are at your best, 
+			inside and out.
+	eof
 
-	performance_content = "Measuring performance - " + extra_content*2
+	longevity_content = <<-eof
+		What scares us about growing older is not age itself, 
+			but the our perception that advanced age comes with poor health.  
+		This paradigm does not have to be the case.  
+		By keeping your metabolism in optimal condition, 
+			aging is little more than extra birthdays to celebrate.  
+		You can keep you vigor, enthusiasm and mental acuity.
+	eof
 
-	restoration_content = "Measuring restoration - " + extra_content*2
-
-	longevity_content = "Measuring longevity - " + extra_content*2
-
-	productivity_content = "Measuring productivity - " + extra_content*2
+	productivity_content = <<-eof
+		Would you ask your staff to due less-than-perfect work?  
+		Would you request that they give less-than their best?  
+		As an employer these questions would appear absurd.  
+		However, by leaving your staff’s wellness to chance, 
+			less-than their best is what you’re getting.  
+		By offering this simple, voluntary benefit to your staff, 
+			you can ensure your company has the opportunity to reach it’s potential.  
+		Provide the opportunity for your staff to Measure their Wellness 
+			and see for yourself how staff performance, enthusiasm, 
+			and even relationships will improve.  
+		Fatigue has very detrimental effects in the workplace.  
+		For example, even improving someone’s energy level can have 
+			a profound impact on the perception of their role, career, 
+			and those around them.
+	eof
 
 	# Initialize local variables
 	performance = { title: "Measuring Performance", content: performance_content }
