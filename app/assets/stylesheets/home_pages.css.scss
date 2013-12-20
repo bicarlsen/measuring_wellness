@@ -9,6 +9,10 @@
 
 //---------- UNIVERSAL ---------------------
 
+.center {
+	text-align: center;
+}
+
 body {
 	color: $primary-text-color;
 	font-family: $font-stack;
@@ -38,19 +42,20 @@ body {
 		padding: 3px;
 		margin: 5px;
 	}
-
-	// Bucket Link
-	.bucket-link {
-		background-color: $primary-color;
-		color: $primary-text-color;
-
-		padding: 3px 5px;
-		border: solid 2px $secondary-color;	
-		border-radius: 5px;
-		margin: 3px;
-
-	} // end .bucket-link
 } // end .bucket
+	
+// Bucket Link
+.bucket-link {
+	background-color: $primary-color;
+	color: $primary-text-color;
+
+	padding: 3px 5px;
+	border: solid 2px $secondary-color;	
+	border-radius: 5px;
+	margin: 3px;
+
+} // end .bucket-link
+
 
 
 

@@ -1,6 +1,6 @@
 <% 
 	locals = { title: title, content: content,
-		bucket_type: "measure-summary", link_base: "measures" } 
+		bucket_type: "measure-summary"} 
 	locals[:image] = image if defined? image
 %>
 <%= render partial: 'bucket', locals: locals %>
