@@ -5,6 +5,7 @@ ruby '2.0.0'
 gem 'rails', '4.0.0'
 # gem 'bootstrap-sass'
 
+
 group :development do
 	# Use sqlite3 as the database for Active Record
 	gem 'sqlite3'
@@ -12,12 +13,22 @@ group :development do
 	# Use RSpec
 	gem 'rspec-rails'
 
+	# Faker
+	gem 'faker'
+
 end
 
 group :test do 
 	# Use Capybara
 	gem 'capybara'
 	gem 'selenium-webdriver'
+
+	# FactoryGirl
+	gem 'factory_girl_rails'
+
+	# Faker
+	gem 'faker'
+
 end
 
 group :production do
@@ -55,7 +66,7 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'

@@ -1,9 +1,23 @@
 MeasuringWellness::Application.routes.draw do
+	# Resources
+	resources :users
+	resources :sessions, only: [:new, :create, :destroy]
 
  	root 'home_pages#index'	
- 	match 'measures', to: 'home_pages#measures', via: 'get'
- 	match 'homeostasis', to: 'home_pages#homeostasis', via: 'get'
- 	match 'science', to: 'home_pages#science', via: 'get'
+ 
+	# Sign Up, Sign In, Sign Out
+	match '/signup', 				to: 'users#new', 					via: 'get'
+	match '/signup',				to: 'users#create',				via: 'post'
+	match '/terms_of_use',	to: 'users#terms_of_use', via: 'get'
+	match '/terms_of_use',	to: 'users#terms_of_use',	via: 'patch'
+	match '/signin',				to: 'sessions#new', 			via: 'get'
+	match '/signin', 				to: 'sessions#create', 		via: 'post'
+	match '/signout',				to:	'sessions#destroy',		via: 'delete'
+
+	# Home Pages
+	match '/measures', 		to: 'home_pages#measures', 			via: 'get'
+ 	match '/homeostasis', 	to: 'home_pages#homeostasis', 	via: 'get'
+ 	match '/science', 			to: 'home_pages#science', 			via: 'get'
 
 	# The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

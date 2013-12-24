@@ -1,0 +1,29 @@
+<%= form_for @user do |f| %>
+	<%= render 'shared/form_errors', object: f.object %>
+
+	<section class='form-section'>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+	</section>
+
+	<section class='form-section'>
+		<%= f.label :email %>
+		<%= f.text_field :email %>
+	</section>
+
+	<section class='form-section'>
+		<%= f.label :password %>
+		<%= f.password_field :password %>
+	</section>
+
+	<section class='form-section'>
+		<%= f.label :password_confirmation, 'Password Confirmation' %>
+		<%= f.password_field :password_confirmation %>
+	</section>
+
+	<section class='form-section submit-form'>
+		<% submit_label = @user.new_record? ? 'Sign Up' : 'Update' %>
+		<%= f.submit submit_label %>
+	</section>
+
+<% end %>

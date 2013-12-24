@@ -1,0 +1,18 @@
+<h1>Terms of Use</h1>
+<%= render 'shared/flash' %>
+
+<iframe>
+	Terms of Use
+</iframe>
+
+<%= form_for @user, url: { action: 'terms_of_use' } do |f| %>
+	<section class='form-section'>
+		<%= f.check_box :terms_of_use %>
+		<%= f.label :terms_of_use, 'I agree to the terms of use' %>
+	</section>
+
+	<section class='form-section submit-form'>
+		<%= f.submit 'Submit' %>
+	</section>
+
+<% end %>

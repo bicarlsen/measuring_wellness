@@ -1,0 +1,13 @@
+<% if flash.any? %>
+	
+	<div class='flash-container'>
+		<ul class='flash-messages'>
+			<% flash.each do |key, msg| %>
+				<li class="flash-message flash-<%= key %> <%= key %>">
+					<%= msg %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+
+<% end %>

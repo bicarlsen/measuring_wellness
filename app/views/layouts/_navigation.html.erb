@@ -3,6 +3,26 @@
 		<li class="navigation-link"><%= link_to 'Home', root_path %></li>
 		<li class="navigation-link"><%= link_to 'Measures', measures_path %></li>
 		<li class="navigation-link"><%= link_to 'Homeostasis', homeostasis_path %></li>
+
+		<div id='signin-container'>
+			<% if !signed_in? # Signed Out %>
+				<li class='navigation-link'>
+					<%= link_to 'Sign In', signin_path %>
+				</li>
+				<li class='navigation-link'>
+					<%= link_to 'Register', signup_path %>
+				</li>
+
+			<% else # Signed In %>
+				<li class='navigation-link'>
+					<%= link_to 'Settings', edit_user_path(current_user) %>
+				</li>
+				<li class='navigation-link'>
+					<%= link_to 'Sign Out', signout_path, method: :delete %>
+				</li>
+
+			<% end %>
+		</div>
 	</ul>
 </div>
 

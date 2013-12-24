@@ -225,50 +225,6 @@ body {
 	}// end img
 } // end .science-content
 
-//----------- NAVIGATION -----------------------
-.navigation {
-	width: 100%;
-	background-color: $primary-color;
-	border-bottom: solid 0.15em $secondary-color;
-
-	ul {
-		padding: 3px 15px;
-		margin: 0px 0px 7px 0px;
-		background-color: $primary-color;
-
-		list-style-type: none;
-
-		li {
-			display: inline-block;
-			margin: 0.1em 3em;
-			background-color: $primary-color;
-
-			a {
-				padding: .2em .5em;
-
-				color: $primary-text-color;
-			} // end a
-		} // end li
-	} // end ul
-} // end .nvaigation
-
-
-//-------------- HEADER ------------------
-
-.logo-container {
-	padding: 7px 0px;
-	width: 100%;
-
-	background-color: $primary-color;
-
-	.site-logo-image {
-		margin-left: 1em;
-	}
-}
-
-
-//------------ FOOTER -----------------
-
 
 
 

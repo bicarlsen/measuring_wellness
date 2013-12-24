@@ -1,0 +1,30 @@
+<%= form_for @user do |f| %>
+	<%= render 'shared/form_errors', object: @user %>
+
+	<section class='form-section'>
+		<%= f.label :birth_date, 'Date of Birth' %>
+		<%= f.date_field :birth_date %>
+	</section>
+
+	<section class='form-section'>
+		<%= f.label :weight %>
+		<%= f.text_field :weight %> lbs.
+	</section>
+
+	<section class='form-section'>
+		<%= f.label :height %>
+		<%= f.text_field :height %> inches
+	</section>
+
+	<section class='form-section'>
+		<%= f.label :gender %>
+		<%= f.radio_button :gender, 'm' %><%= label_tag 'Male' %>
+		<%= f.radio_button :gender, 'f' %><%= label_tag 'Female' %>
+	</section>
+
+	<section class='form-section submit-form'>
+		<% sub_label = @user.new_record? ? 'Set Attributes' : 'Update Attributes' %>
+		<%= f.submit sub_label%>
+	</section>
+
+<% end %>
