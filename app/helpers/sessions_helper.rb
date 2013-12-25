@@ -39,8 +39,8 @@ module SessionsHelper
 		end
 	end
 	
-	def must_be_current_user(user)
-		unless user == current_user
+	def must_own_resource
+		unless User.find(params[:id]) == current_user
 			redirect_to root_path
 		end
 	end # must_be_current_user

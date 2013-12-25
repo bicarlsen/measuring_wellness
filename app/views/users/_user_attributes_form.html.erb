@@ -3,7 +3,7 @@
 
 	<section class='form-section'>
 		<%= f.label :birth_date, 'Date of Birth' %>
-		<%= f.date_select :birth_date %>
+		<%= f.date_select :birth_date, start_year: 1900, end_year: Time.now.year %>
 	</section>
 
 	<section class='form-section'>
