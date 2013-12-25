@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	before_action :must_be_signed_in, except: [:new, :create]
-	before_action :must_be_current_user, except: [:new, :create]
+	#before_action :must_be_current_user, except: [:new, :create]
 	before_action :must_be_signed_out, only: [:new, :create]
 
 
