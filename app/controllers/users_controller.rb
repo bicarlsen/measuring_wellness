@@ -1,8 +1,14 @@
 class UsersController < ApplicationController
-	before_action :must_be_signed_in, 
-		only: [:terms_of_user, :show, :edit, :update, :destroy]
+	before_action :must_be_signed_in, except: [:new, :create]
+	before_action :must_be_current_user, except: [:new, :create]
+	before_action :must_be_signed_out, only: [:new, :create]
+
 
 	def home
+		@user = current_user
+	end
+
+	def profile
 		@user = current_user
 	end
 	

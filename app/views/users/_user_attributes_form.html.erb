@@ -3,7 +3,7 @@
 
 	<section class='form-section'>
 		<%= f.label :birth_date, 'Date of Birth' %>
-		<%= f.date_field :birth_date %>
+		<%= f.date_select :birth_date %>
 	</section>
 
 	<section class='form-section'>
@@ -23,8 +23,7 @@
 	</section>
 
 	<section class='form-section submit-form'>
-		<% sub_label = @user.new_record? ? 'Set Attributes' : 'Update Attributes' %>
-		<%= f.submit sub_label%>
+		<%= f.submit 'Update' %>
 	</section>
 
 <% end %>

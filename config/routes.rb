@@ -15,9 +15,13 @@ MeasuringWellness::Application.routes.draw do
 	match '/signout',				to:	'sessions#destroy',		via: 'delete'
 
 	# Home Pages
-	match '/measures', 		to: 'home_pages#measures', 			via: 'get'
+	match '/measures', 			to: 'home_pages#measures', 			via: 'get'
  	match '/homeostasis', 	to: 'home_pages#homeostasis', 	via: 'get'
  	match '/science', 			to: 'home_pages#science', 			via: 'get'
+
+	# User Pages
+	match 'users/:id/profile',	to: 'users#profile',	via: 'get', as: 'profile'
+
 
 	# The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

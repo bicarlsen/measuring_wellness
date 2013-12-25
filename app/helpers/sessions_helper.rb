@@ -32,8 +32,14 @@ module SessionsHelper
 			redirect_to signin_path
 		end
 	end # must_be_signed_in
+
+	def must_be_signed_out
+		if signed_in?
+			redirect_to root_path
+		end
+	end
 	
-	def must_be_current_user(user)
+	def must_be_current_user
 		unless user == current_user
 			redirect_to root_path
 		end
