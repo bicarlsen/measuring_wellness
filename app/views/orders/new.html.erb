@@ -1,0 +1,28 @@
+<h1>Order a Test</h1>
+
+<div id='instruction-container'>
+	<h2>Instructions</h2>
+	<ol id="order-instructions">
+		<li class='order-instruction'></li>
+	</ol>
+</div>
+
+<div class='form-container'>
+	<%= form_for @order do |f| %>
+		<section class='form-section'>
+			<%= f.label :test_center %>
+			<%= f.select :test_center, ['center 1'] %>
+		</section>
+		<section class='form-section'>
+			<%= f.label :promotion_code, 'Redemption Code' %>
+			<%= f.text_field :promotion_code %>
+		</section>
+
+		<section class='form-section form-submit'>
+			<%= f.submit 'Place Order' %>
+		</section>
+
+	<% end %>
+</div>
+
+

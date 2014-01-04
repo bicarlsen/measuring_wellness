@@ -2,6 +2,7 @@ MeasuringWellness::Application.routes.draw do
 	# Resources
 	resources :users
 	resources :sessions, only: [:new, :create, :destroy]
+	resources :orders
 
  	root 'home_pages#index'	
  
