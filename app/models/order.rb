@@ -3,11 +3,13 @@ class Order < ActiveRecord::Base
 	before_validation :resolve_status
 	
 	# Relations
-	has_one :user
+	belongs_to :user
 	has_one :result
 
 	STATUS = ['recieved', 'authorized', 'processed', 'completed', 'cancelled']
 	validates :status, presence: true, inclusion: { in: STATUS }
+
+	validates :user_id, presence: true
 
 	private
 
@@ -15,7 +17,7 @@ class Order < ActiveRecord::Base
 			if self.status
 				if self.status.is_a? Integer
 					self.status = STATUS[self.status] if
-						self.status.included? (0...STATUS.length)
+						self.status.between?( 0, STATUS.length )
 
 				elsif self.status.is_a? String
 					self.status.downcase!

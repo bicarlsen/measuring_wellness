@@ -1,11 +1,14 @@
 class OrdersController < ApplicationController
-	
+	before_action :must_be_signed_in
+
+
 	def index
 		if current_user.admin?
 			@orders = Order.all
 
 		else
 			@orders = current_user.orders
+			@orders.order(created_at: :desc)
 
 		end	
 	end # index
@@ -19,7 +22,7 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-		@order = Order.new order_params
+		@order = current_user.orders.build order_params
 		@order.status = 0;  # Initial status is always 0
 
 		if @order.save

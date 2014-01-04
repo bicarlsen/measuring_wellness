@@ -1,3 +1,4 @@
 <h1><%= @user.name %></h1>
 <%= link_to 'Profile', profile_path(@user) %>
 <%= link_to 'Order Test', new_order_path %>
+<%= link_to current_user.admin? ? 'Orders' : 'My Orders', orders_path %>
