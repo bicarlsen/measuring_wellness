@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 	before_action :must_be_signed_in
-
+	before_action :must_accept_terms, except: [:index]
 
 	def index
 		if current_user.admin?
@@ -67,5 +67,9 @@ class OrdersController < ApplicationController
 			params.require(:order).permit :status, :test_center, :promotion_code
 		end
 
-
+		def must_accept_terms
+			flash[:error] = "Please accept out Terms of Use"
+			redirect_to terms_of_use_path unless current_user && current_user.terms_of_use
+		end
+	
 end
