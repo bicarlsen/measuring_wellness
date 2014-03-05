@@ -1,0 +1,12 @@
+<h1>New Coupon</h1>
+<%= form_for @coupon do |f| %>
+	<%= f.hidden_field :type, value: 'coupon' %>
+
+	<%= f.label :key %>
+	<%= f.text_field :key %>
+
+	<%= f.label :value %>
+	<%= f.text_field :value %>
+
+	<%= f.submit 'Add Coupon' %>
+<% end %>

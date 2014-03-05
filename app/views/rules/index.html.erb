@@ -1,0 +1,14 @@
+<h1>Rules</h1>
+<%= render 'shared/flash' %>
+
+<%= link_to 'Add Rule', new_rule_path %>
+
+<ul id='rules-list'>
+	<% @rules.each do |rule| %>
+		<span class='rule-group'><%= rule.analyte_group.name %></span>
+		<span class='rule-weight'><%= rule.default_weight %></span>
+	<% end %>
+</ul>
+
+
+

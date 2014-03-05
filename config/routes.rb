@@ -3,6 +3,12 @@ MeasuringWellness::Application.routes.draw do
 	resources :users
 	resources :sessions, only: [:new, :create, :destroy]
 	resources :orders
+	resources :coupons, only: [:new, :create, :destroy], path: '/admin/coupon'
+	resources :analytes, only: [:index, :new, :create, :destroy], path: '/admin/analyte'
+	resources :analyte_groups, path: '/admin/analyte_group'
+	resources :rules, path: '/admin/rule'
+	resources :thresholds, path: '/admin/threshold'
+
 
  	root 'home_pages#index'	
  
@@ -21,9 +27,12 @@ MeasuringWellness::Application.routes.draw do
  	match '/science', 			to: 'home_pages#science', 			via: 'get'
 
 	# User Pages
-	match 'users/:id/profile',	to: 'users#profile',	via: 'get', as: 'profile'
-
-
+	match '/users/:id/profile',	to: 'users#profile',	via: 'get', as: 'profile'
+	
+	# Admin Pages
+	match '/admin', to: 'admin#home', via: 'get'
+	match '/admin/orders', to: 'admin#orders', via: 'get'
+	
 	# The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

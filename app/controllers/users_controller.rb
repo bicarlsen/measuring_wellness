@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 	before_action :must_be_signed_in, except: [:new, :create]
-	before_action :must_own_resource, except: [:new, :create, :terms_of_use]
+	before_action :must_own_resource, 
+		except: [:new, :create, :terms_of_use]
 	before_action :must_be_signed_out, only: [:new, :create]
 
 	def home
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
 	def profile
 		@user = current_user
 	end
-	
+
 	def new
 		@user = User.new
 	end

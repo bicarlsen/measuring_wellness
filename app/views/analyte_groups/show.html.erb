@@ -1,0 +1,17 @@
+<h1>Analyte Group</h1>
+<h2><%= @group.name %></h2>
+<h3>Default Thresholds</h3>
+<section>
+	<% @group.default_partitions.each do |part| %>
+		<ul>
+			<li><%= part.to_s %></li>
+		</ul>
+	<% end %>
+</section>
+
+<h3>Rules</h3>
+<ul id='group-rules'>
+	<% @rules.each do |rule| %>
+		<li><%= render rule %></li>
+	<% end %>
+</ul>

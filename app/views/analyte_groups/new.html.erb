@@ -1,0 +1,9 @@
+<h1>Analyte Group</h1>
+<%= render 'shared/flash' %>
+
+<%= form_for @group do |f| %>
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<%= f.submit %>
+<% end %>

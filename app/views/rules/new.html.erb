@@ -1,0 +1,16 @@
+<h1>Add Rule</h1>
+<%= render 'shared/flash' %>
+
+<%= form_tag controller: :rules, action: :create, method: :post  do %>
+	<%= label_tag :analyte_group, 'Analyte Group' %>
+	<%= select_tag :analyte_group, options_for_select( @groups ) %>
+
+	<%= label_tag :analyte %>
+	<%= select_tag :analyte, options_for_select( @analytes ) %>
+
+	<%= label_tag :default_weight, 'Default Weight' %>
+	<%= text_field_tag :default_weight %>
+
+	<%= submit_tag %>
+<% end %>
+

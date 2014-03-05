@@ -25,6 +25,14 @@ class OrdersController < ApplicationController
 		@order = current_user.orders.build order_params
 		@order.status = 0;  # Initial status is always 0
 
+		# Invalid Coupon
+		if Coupon.where(key: @order.promotion_code).empty?
+			flash.now[:error] = 'The Redemption Code you entered is incorrect.'
+			render 'new'
+			return
+		end
+	
+		# Valid Coupon	
 		if @order.save
 			flash[:success] = 'Order created!'
 			redirect_to root_path
@@ -68,8 +76,10 @@ class OrdersController < ApplicationController
 		end
 
 		def must_accept_terms
-			flash[:error] = "Please accept out Terms of Use"
-			redirect_to terms_of_use_path unless current_user && current_user.terms_of_use
+			 unless current_user && current_user.terms_of_use
+				flash[:error] = "Please accept our Terms of Use before continuing"
+				redirect_to terms_of_use_path
+			 end
 		end
 	
 end

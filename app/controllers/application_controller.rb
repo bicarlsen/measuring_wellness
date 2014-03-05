@@ -5,4 +5,7 @@ class ApplicationController < ActionController::Base
 
 	# Session Support
 	include SessionsHelper
+
+	# Admin Support
+	include AdminHelper
 end

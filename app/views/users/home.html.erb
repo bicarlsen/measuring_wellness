@@ -1,4 +1,7 @@
 <h1><%= @user.name %></h1>
+<%= render 'shared/flash' %>
+
 <%= link_to 'Profile', profile_path(@user) %>
 <%= link_to 'Order Test', new_order_path %>
-<%= link_to current_user.admin? ? 'Orders' : 'My Orders', orders_path %>
+<%= link_to 'My Orders', orders_path %>
+<%= link_to 'Admin', admin_path if current_user.admin? %>

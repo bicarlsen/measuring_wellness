@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131231005239) do
+ActiveRecord::Schema.define(version: 20140305011730) do
+
+  create_table "analyte_groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "default_partitions"
+  end
+
+  create_table "analytes", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "orders", force: true do |t|
     t.datetime "created_at"
@@ -25,6 +38,25 @@ ActiveRecord::Schema.define(version: 20131231005239) do
   add_index "orders", ["promotion_code"], name: "index_orders_on_promotion_code"
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
+  create_table "rules", force: true do |t|
+    t.integer  "analyte_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "partitions"
+    t.integer  "default_weight"
+    t.integer  "analyte_id"
+  end
+
+  add_index "rules", ["analyte_group_id"], name: "index_rules_on_analyte_group_id"
+
+  create_table "settings", force: true do |t|
+    t.string "type"
+    t.string "key"
+    t.text   "value"
+  end
+
+  add_index "settings", ["type"], name: "index_settings_on_type"
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
@@ -33,7 +65,7 @@ ActiveRecord::Schema.define(version: 20131231005239) do
     t.float    "weight"
     t.float    "height"
     t.string   "gender"
-    t.boolean  "admin"
+    t.string   "roles"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_token"
