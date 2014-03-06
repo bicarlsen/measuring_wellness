@@ -1,0 +1,26 @@
+<h1>Analyte</h1>
+<%= link_to 'All Analytes', analytes_path %>
+
+<h2><%= @analyte.name %></h2>
+
+<h3>Rules</h3>
+<table>
+	<thead>
+		<th>Severity</th>
+		<th>Threshold</th>
+		<th>Weight</th>
+	</thead>
+	<tbody>
+		<% @analyte.partitions.each do |part| %>
+			<tr>
+				<td><%= part.severity %></td>
+				<td><%= part.threshold %></td>
+				<td><%= part.weight %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<%= link_to 'Edit', edit_analyte_path( @analyte ) %>
+<%= link_to 'Delete', @analyte, method: :delete,
+	confirm: "Are you sure you want to delete this Analyte?" %>

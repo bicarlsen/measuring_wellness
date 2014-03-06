@@ -11,19 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305011730) do
+ActiveRecord::Schema.define(version: 20140306035148) do
 
   create_table "analyte_groups", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "default_partitions"
+    t.text     "default_weights", limit: 255
   end
 
   create_table "analytes", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "partitions"
   end
 
   create_table "orders", force: true do |t|
@@ -42,8 +43,8 @@ ActiveRecord::Schema.define(version: 20140305011730) do
     t.integer  "analyte_group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "partitions"
-    t.integer  "default_weight"
+    t.text     "partitions",       limit: 255
+    t.integer  "weight"
     t.integer  "analyte_id"
   end
 

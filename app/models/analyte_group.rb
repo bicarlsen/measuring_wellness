@@ -1,6 +1,6 @@
 class AnalyteGroup < ActiveRecord::Base
 	# Callbacks
-	serialize :default_partitions
+	serialize :default_weights
 	after_initialize :initialize_partitions
 	
 	# Relations
@@ -10,12 +10,16 @@ class AnalyteGroup < ActiveRecord::Base
 
 	# Validations
 	validates :name, presence: true
-	
+
+
+	def add_weight( severity = 0, weight = 1 )
+		self.default_weights << SeverityWeight.new( severity, weight )
+	end	
 
 	private
 	
 		def initialize_partitions
-			self.default_partitions ||= [ Partition.new ]
+			self.default_weights ||= [ SeverityWeight.new ] if self.new_record?
 		end
 
 end

@@ -1,14 +1,26 @@
 <h1>Rules</h1>
+<%= link_to 'Admin', admin_path %>
 <%= render 'shared/flash' %>
 
 <%= link_to 'Add Rule', new_rule_path %>
 
-<ul id='rules-list'>
-	<% @rules.each do |rule| %>
-		<span class='rule-group'><%= rule.analyte_group.name %></span>
-		<span class='rule-weight'><%= rule.default_weight %></span>
-	<% end %>
-</ul>
+<table>
+	<thead>
+		<th>Group</th>
+		<th>Analyte</th>
+		<th>Weight</th>
+	</thead>
+	<tbody>
+		<% @rules.each do |rule| %>
+			<tr>
+				<td><%= rule.analyte_group.name %></td>
+				<td><%= rule.analyte.name %></td>
+				<td><%= rule.weight %></td>
+				<td><%= link_to 'View', rule_path( rule ) %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
 
 
 

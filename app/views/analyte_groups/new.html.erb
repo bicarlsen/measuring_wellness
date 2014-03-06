@@ -5,5 +5,27 @@
 	<%= f.label :name %>
 	<%= f.text_field :name %>
 
-	<%= f.submit %>
+	<h2>Default Severity Weights</h2>
+	<table>
+		<thead>
+			<th>Severity</th>
+			<th>Default Weight</th>
+		</thead>
+		<tbody>
+			<% @group.default_weights.each do |weight| %>
+				<tr>
+					<%= f.fields_for 'default_weights', weight, index: nil do |wf| %>
+						<td><%= wf.text_field :severity %></td>
+						<td><%= wf.text_field :weight %></td>
+					<% end %>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<%= submit_tag "Add Weight", name: :add_weight %>
+
+	<%= f.submit 'Create Group' %>
 <% end %>
+
+<%= link_to 'Cancel', analyte_groups_path %>

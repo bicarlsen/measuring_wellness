@@ -3,7 +3,10 @@ class AnalytesController < ApplicationController
 	
 	def index
 		@analytes = Analyte.all
-		@new_analyte = Analyte.new
+	end
+
+	def show
+		@analyte = Analyte.find params[:id]
 	end
 
 	def new
@@ -12,6 +15,19 @@ class AnalytesController < ApplicationController
 
 	def create
 		@analyte = Analyte.new analyte_params
+		@analyte.partitions = [] # Reset partitions for clean slate
+		params[:analyte][:partitions].each do |part|
+			@analyte.create_partition(
+				part[:severity].to_i, part[:threshold].to_i, part[:weight].to_i
+			)
+		end
+
+		# Add Partition
+		if params[:add_partition]
+			@analyte.create_partition
+			render :new
+			return
+		end
 
 		if @analyte.save
 			flash[:success] = "Analyte created!"
@@ -19,9 +35,15 @@ class AnalytesController < ApplicationController
 
 		else
 			flash.now[:error] = 'There was an error creating the analyte'
-			render :index
+			render :new
 		
 		end
+	end
+
+	def edit
+	end
+
+	def update
 	end
 
 	def destroy
@@ -29,9 +51,8 @@ class AnalytesController < ApplicationController
 		analyte.destroy
 
 		flash[:success] = "Analyte destroyed!"
-		redirect_to admin_path
+		redirect_to analytes_path
 	end
-
 
 	private
 

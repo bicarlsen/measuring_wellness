@@ -4,7 +4,7 @@ MeasuringWellness::Application.routes.draw do
 	resources :sessions, only: [:new, :create, :destroy]
 	resources :orders
 	resources :coupons, only: [:new, :create, :destroy], path: '/admin/coupon'
-	resources :analytes, only: [:index, :new, :create, :destroy], path: '/admin/analyte'
+	resources :analytes, path: '/admin/analyte'
 	resources :analyte_groups, path: '/admin/analyte_group'
 	resources :rules, path: '/admin/rule'
 	resources :thresholds, path: '/admin/threshold'

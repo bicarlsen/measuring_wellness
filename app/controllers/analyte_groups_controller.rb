@@ -14,6 +14,19 @@ class AnalyteGroupsController < ApplicationController
 
 	def create
 		@group = AnalyteGroup.new group_params
+		@group.default_weights = []
+		params[:analyte_group][:default_weights].each do |weight|
+			@group.add_weight(
+				weight[:severity].to_i, weight[:weight].to_i 
+			)
+		end
+
+		# Add Default Weight
+		if params[:add_weight]
+			@group.add_weight
+			render :new
+			return
+		end
 
 		if @group.save
 			flash[:success] = "Analyte Group created!"
@@ -33,12 +46,17 @@ class AnalyteGroupsController < ApplicationController
 	end
 
 	def destroy
+		group = AnalyteGroup.find params[:id]
+		group.destroy
+	
+		flash[:success] = "Analyte Group destroyed!"
+		redirect_to analyte_groups_path
 	end
 
 	private
 
 		def group_params
-			params.require(:analyte_group).permit :name, :partitions
+			params.require(:analyte_group).permit :name
 		end
 
 end

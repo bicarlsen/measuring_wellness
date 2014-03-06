@@ -1,22 +1,18 @@
 <h1>Analytes</h1>
+<%= link_to 'Admin', admin_path %>
+<%= render 'shared/flash' %>
+
+<%= link_to "New Analyte", new_analyte_path %>
 
 <ul id="analytes">
 	<% @analytes.each do |analyte| %>		
 		<li class="analyte">
-			<span class="analyte-name"><%= analyte.name %></span>
-			<span class="analyte-actions">
-				<%= link_to 'Delete', analyte, method: :delete %>
+			<span class="analyte-name">
+				<%= link_to analyte.name, analyte %>
 			</span>
 		</li>
 	<% end %>
 </ul>
 
-<div>
-	<%= form_for @new_analyte do |f| %>
-		<%= f.label :name %>
-		<%= f.text_field :name%>
-
-		<%= f.submit %>
-	<% end %>
 </div>
 

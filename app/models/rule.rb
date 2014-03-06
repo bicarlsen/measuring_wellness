@@ -1,13 +1,17 @@
 class Rule < ActiveRecord::Base
-	serialize :partitions
+	include Partitions
 
+	# Callbacks
+	serialize :partitions
+	after_initialize :initialize_partitions
+	
 	# Relations
 	belongs_to :analyte
 	belongs_to :analyte_group
 
 	# Validations
 	#validates :analyte, 				presence: true
-	validates :default_weight, 	presence: true
+	validates :weight, 	presence: true
 
 
 	def analyte

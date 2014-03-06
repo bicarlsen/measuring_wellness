@@ -1,2 +1,37 @@
-<%= @rule.analyte_group %>
-<%= @rule.default_weight %>
+<h1>Rule</h1>
+<%= link_to 'All Rules', rules_path %>
+
+<div>
+	<section>
+		Analyte Group: <%= @rule.analyte_group.name %>
+	</section>
+	<section>
+		Analyte: <%= @rule.analyte.name %>
+	</section>
+	<section>
+		Weight: <%= @rule.weight %>
+	</section>
+</div>
+
+<h2>Partitions</h2>
+<table>
+	<thead>
+		<th>Severity</th>
+		<th>Threshold</th>
+		<th>Weight</th>
+	</thead>
+	<tbody>
+		<% @rule.partitions.each do |part| %>
+			<tr>
+				<td><%= part.severity %></td>
+				<td><%= part.threshold %></td>
+				<td><%= part.weight %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<%= link_to 'Edit', edit_rule_path( @rule ) %>
+<%= link_to 'Delete', @rule, method: :delete,
+	confirm: "Are you sure you want to delete this rule?" %>
+
