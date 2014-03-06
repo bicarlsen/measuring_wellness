@@ -1,0 +1,23 @@
+<table class='rules-table'>
+	<thead>
+		<th>Analyte</th>
+		<th>Weight</th>
+		<th>Partitions</th>
+	</thead>
+	<tbody>
+		<% rules.each do |rule| %>
+			<tr class='rule'>
+				<td class='analyte'>
+					<%= link_to rule.analyte.name, analyte_path( rule.analyte ) %>
+				</td>
+				<td class='weight'>
+					<%= rule.weight %>
+				</td>
+				<td class='partitions'>
+					<%= render partial: 'shared/partitions_table', object: rule.partitions, 
+							as: :partitions %>
+				</td>
+			<% end %>
+	</tbody>
+</table>
+

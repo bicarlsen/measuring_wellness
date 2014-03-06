@@ -3,10 +3,13 @@
 
 <div>
 	<section>
-		Analyte Group: <%= @rule.analyte_group.name %>
+		Analyte Group: 
+		<%= link_to @rule.analyte_group.name, 
+			analyte_group_path( @rule.analyte_group ) %>
 	</section>
 	<section>
-		Analyte: <%= @rule.analyte.name %>
+		Analyte: 
+		<%= link_to @rule.analyte.name, analyte_path( @rule.analyte ) %>
 	</section>
 	<section>
 		Weight: <%= @rule.weight %>
@@ -14,22 +17,8 @@
 </div>
 
 <h2>Partitions</h2>
-<table>
-	<thead>
-		<th>Severity</th>
-		<th>Threshold</th>
-		<th>Weight</th>
-	</thead>
-	<tbody>
-		<% @rule.partitions.each do |part| %>
-			<tr>
-				<td><%= part.severity %></td>
-				<td><%= part.threshold %></td>
-				<td><%= part.weight %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+<%= render partial: 'shared/partitions_table', object: @rule.partitions,
+	as: :partitions %>
 
 <%= link_to 'Edit', edit_rule_path( @rule ) %>
 <%= link_to 'Delete', @rule, method: :delete,

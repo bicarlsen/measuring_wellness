@@ -3,7 +3,6 @@
 
 <h2><%= @analyte.name %></h2>
 
-<h3>Rules</h3>
 <table>
 	<thead>
 		<th>Severity</th>
@@ -20,7 +19,11 @@
 		<% end %>
 	</tbody>
 </table>
-
 <%= link_to 'Edit', edit_analyte_path( @analyte ) %>
+
+<h3>Rules</h3>
+<%= render partial: 'rules_table', object: @rules, as: :rules  %>
+<%= link_to 'Add Rule', new_rule_path( analyte: @analyte ) %>
+
 <%= link_to 'Delete', @analyte, method: :delete,
 	confirm: "Are you sure you want to delete this Analyte?" %>

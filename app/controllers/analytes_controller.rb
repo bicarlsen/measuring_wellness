@@ -7,6 +7,7 @@ class AnalytesController < ApplicationController
 
 	def show
 		@analyte = Analyte.find params[:id]
+		@rules = @analyte.rules
 	end
 
 	def new

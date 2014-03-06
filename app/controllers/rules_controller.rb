@@ -13,6 +13,9 @@ class RulesController < ApplicationController
 		@rule = Rule.new
 		@groups = analyte_groups_for_select
 		@analytes = analytes_for_select
+
+		@selected_group = params[:group]
+		@selected_analyte = params[:analyte]
 	end
 
 	def create

@@ -3,20 +3,24 @@
 
 <h2><%= @group.name %></h2>
 <h3>Default Weights</h3>
-<section>
-	<% @group.default_weights.each do |weight| %>
-		<ul>
-			<li><%= weight.to_s %></li>
-		</ul>
-	<% end %>
-</section>
+<table>
+	<thead>
+		<th>Severity</th>
+		<th>Weight</th>
+	</thead>
+	<tbody>
+		<% @group.default_weights.each do |weight| %>
+			<tr>
+				<td><%= weight.severity %></td>
+				<td><%= weight.weight %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
 
 <h3>Rules</h3>
-<ul id='group-rules'>
-	<% @rules.each do |rule| %>
-		<li><%= render rule %></li>
-	<% end %>
-</ul>
+<%= render partial: 'rules_table', object: @rules, as: :rules %>
+<%= link_to 'Add Rule', new_rule_path( group: @group ) %>
 
 <%= link_to 'Edit', edit_analyte_group_path( @group ) %>
 <%= link_to 'Delete', @group, method: :delete,

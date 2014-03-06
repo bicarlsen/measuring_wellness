@@ -1,0 +1,19 @@
+<table class='partitions-table'>
+	<thead>
+		<th scope='row'>Severity</th>
+		<th scope='row'>Threshold</th>
+		<th scope='row'>Weight</th>
+	</thead>
+	<tbody>
+		<% partitions.each do |part| %>
+			<tr class='partition'>
+				<td class='severity'><%= part.severity%></td>
+				<td class='threshold'><%= part.threshold %></td>
+				<td class='weight'><%= part.weight %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+
+

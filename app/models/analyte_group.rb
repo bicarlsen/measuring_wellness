@@ -14,6 +14,7 @@ class AnalyteGroup < ActiveRecord::Base
 
 	def add_weight( severity = 0, weight = 1 )
 		self.default_weights << SeverityWeight.new( severity, weight )
+		self.default_weights.sort!
 	end	
 
 	private
