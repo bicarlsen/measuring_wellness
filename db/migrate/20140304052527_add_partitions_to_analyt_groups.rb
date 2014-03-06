@@ -1,6 +1,6 @@
 class AddPartitionsToAnalytGroups < ActiveRecord::Migration
-  def change
-  	remove_column :analyte_groups, :exteme_weight 
+	def change
+  	remove_column :analyte_groups, :extreme_weight 
   	remove_column :analyte_groups, :severe_weight 
   	remove_column :analyte_groups, :moderate_weight 
   	remove_column :analyte_groups, :mild_weight 

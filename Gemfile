@@ -13,9 +13,6 @@ group :development do
 	# Use RSpec
 	gem 'rspec-rails'
 
-	# Faker
-	gem 'faker'
-
 end
 
 group :test do 
