@@ -1,0 +1,22 @@
+<h1>Tests</h1>
+<%= link_to 'Admin', admin_path %>
+<%=  render 'shared/flash'%>
+
+<%=  link_to 'Enter Test Results', new_test_path %>
+<table>
+	<thead>
+		<th>User</th>
+		<th>Order</th>
+		<th>Date</th>
+	</thead>
+	<tbody>
+		<% @tests.each do |t| %>
+			<tr>
+				<td><%= t.user.name %></td>
+				<td><%= t.order.id %></td>
+				<td><%= t.order.created_at %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+

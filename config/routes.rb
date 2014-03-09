@@ -8,6 +8,8 @@ MeasuringWellness::Application.routes.draw do
 	resources :analyte_groups, path: '/admin/analyte_group'
 	resources :rules, path: '/admin/rule'
 	resources :thresholds, path: '/admin/threshold'
+	resources :results, path: '/admin/result'
+	resources :tests, path: '/admin/test'
 
 
  	root 'home_pages#index'	

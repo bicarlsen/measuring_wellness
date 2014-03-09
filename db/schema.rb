@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306035148) do
+ActiveRecord::Schema.define(version: 20140309021238) do
 
   create_table "analyte_groups", force: true do |t|
     t.string   "name"
@@ -32,12 +32,22 @@ ActiveRecord::Schema.define(version: 20140306035148) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "status"
-    t.string   "test_center"
+    t.integer  "test_center_id", limit: 255
     t.string   "promotion_code"
   end
 
   add_index "orders", ["promotion_code"], name: "index_orders_on_promotion_code"
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+
+  create_table "results", force: true do |t|
+    t.integer  "test_id"
+    t.integer  "analyte_id"
+    t.decimal  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "results", ["test_id"], name: "index_results_on_test_id"
 
   create_table "rules", force: true do |t|
     t.integer  "analyte_group_id"
@@ -57,6 +67,13 @@ ActiveRecord::Schema.define(version: 20140306035148) do
   end
 
   add_index "settings", ["type"], name: "index_settings_on_type"
+
+  create_table "tests", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "order_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

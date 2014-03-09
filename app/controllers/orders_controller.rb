@@ -72,7 +72,7 @@ class OrdersController < ApplicationController
 	private
 			
 		def order_params
-			params.require(:order).permit :status, :test_center, :promotion_code
+			params.require(:order).permit :status, :test_center_id, :promotion_code
 		end
 
 		def must_accept_terms

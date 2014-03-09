@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
 	# Relations
 	has_many :orders
-	has_many :results, through: :orders
+	has_many :tests
+	has_many :results, through: :tests
+	has_many :recommendations, through: :tests
 
 	# Callbacks
 	after_initialize :set_default_role

@@ -7,6 +7,7 @@ class Analyte < ActiveRecord::Base
 
 	# Relations
 	has_many :rules
+	has_many :analytes
 
 	# Validations
 	validates :name, presence: true

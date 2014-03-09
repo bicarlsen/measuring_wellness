@@ -4,7 +4,8 @@ class Order < ActiveRecord::Base
 	
 	# Relations
 	belongs_to :user
-	has_one :result
+	has_one :test
+	has_many :results, through: :test
 
 	STATUS = ['recieved', 'authorized', 'processed', 'completed', 'cancelled']
 	validates :status, presence: true, inclusion: { in: STATUS }

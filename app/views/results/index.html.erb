@@ -1,0 +1,25 @@
+<h1>Results</h1>
+<%= link_to "Admin", admin_path %>
+<%= render 'shared/flash' %>
+
+<%= link_to 'Add Result', new_result_path %>
+<table>
+	<thead>
+		<th>User</th>
+		<th>Test</th>
+		<th>Analyte</th>
+		<th>Amount</th>
+	</thead>
+	<tbody>
+		<% @results.each do |result| %>
+			<tr>
+				<td><%= result.test.user %></td>
+				<td><%= result.test.id %></td>
+				<td><%= result.analyte %></td>
+				<td><%= result.amount %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+

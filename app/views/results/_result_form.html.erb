@@ -1,0 +1,15 @@
+<%= form_tag do |f| %>
+	<%= label_tag :test %>
+	<%= select_tag :test, options_for_select( @tests ) %>
+
+	<%= label_tag :analyte %>
+	<%= select_tag :analyte, options_for_select( @analytes ) %>
+
+	<%= label_tag :amount %>
+	<%= text_field_tag :amount %>
+
+	<%= submit_tag "Save Result" %>
+<% end %>
+
+
+

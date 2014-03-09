@@ -1,0 +1,30 @@
+<h1>New Test</h1>
+<%=  render 'shared/flash' %>
+
+<%= form_tag controller: :tests, action: :create do %>
+	<%= label_tag :user %>
+	<%= select_tag :user, options_for_select( @users, @selected_user ) %>
+	<%= submit_tag "Load User Orders", name: :search_user %>
+
+	<%= label_tag :order %>
+	<%= select_tag :order, options_for_select( @orders ) %>
+
+	<h2>Results</h2>
+	
+	<% @results.each do |result| %>
+		<section>
+			<%= hidden_field_tag :analyte_id, result.analyte_id,
+				name: "[results][][analyte_id]" %>
+
+			<%= label_tag :amount, "#{result.analyte.name} Amount" %>
+			<%= text_field_tag :amount, nil, name: "[results][][amount]" %>
+			
+			<%= check_box_tag "[results][][not_tested]" %>
+			<%= label_tag :not_tested, "Analyte Not Tested" %>
+		</section>
+	<% end %>
+
+	<%= submit_tag 'Create Test' %>
+<% end %>
+
+<%= link_to 'Cancel', tests_path %>
