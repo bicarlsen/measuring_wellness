@@ -9,4 +9,8 @@ class Result < ActiveRecord::Base
 	# Validations
 	validates :amount, presence: true
 
+	def test
+		Test.find self.test_id
+	end
+
 end

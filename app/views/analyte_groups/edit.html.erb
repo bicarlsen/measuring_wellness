@@ -1,5 +1,5 @@
-<h1>Analyte Group</h1>
+<h1>Edit Analyte Group</h1>
 <%= render 'shared/flash' %>
 
 <%= render partial: 'group_form', object: @group, as: :group %>
-<%= link_to 'Cancel', analyte_groups_path %>
+<%= link_to 'Cancel', analyte_group_path( @group ) %>

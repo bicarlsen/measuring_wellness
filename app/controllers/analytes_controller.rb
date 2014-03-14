@@ -19,7 +19,9 @@ class AnalytesController < ApplicationController
 		@analyte.partitions = [] # Reset partitions for clean slate
 		params[:analyte][:partitions].each do |part|
 			@analyte.create_partition(
-				part[:severity].to_i, part[:threshold].to_i, part[:weight].to_i
+				part[:severity].to_i, part[:threshold].to_f, part[:weight].to_f
+			) unless (
+				part[:severity].blank? && part[:threshold].blank? && part[:weight].blank?
 			)
 		end
 
@@ -42,9 +44,38 @@ class AnalytesController < ApplicationController
 	end
 
 	def edit
+		@analyte = Analyte.find params[:id]
 	end
 
 	def update
+		@analyte = Analyte.find params[:id]
+
+		@analyte.update_attributes analyte_params
+		@analyte.partitions = []
+		params[:analyte][:partitions].each do |part|
+			@analyte.create_partition(
+				part[:severity].to_i, part[:threshold].to_f, part[:weight].to_f
+			) unless (
+				part[:severity].blank? && part[:threshold].blank? && part[:weight].blank?
+			)
+		end
+
+		if params[:add_partition]
+			@analyte.create_partition
+			render :edit
+			return
+		end
+	
+		if @analyte.save
+			flash[:success] = "Analyte updated!"
+			redirect_to analyte_path( @analyte )
+
+		else
+			flash.now[:error] = 'There was an error updating the Analyte'
+			render :edit
+		
+		end
+
 	end
 
 	def destroy

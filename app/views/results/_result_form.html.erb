@@ -1,9 +1,11 @@
-<%= form_tag do |f| %>
-	<%= label_tag :test %>
-	<%= select_tag :test, options_for_select( @tests ) %>
+<%= form_tag controller: :results, 
+	action: ( @result.new_record? ? :create : :update ) do |f| %>
+		
+		<%= label_tag :test %>
+	<%= select_tag :test, options_for_select( @tests, @default_test ) %>
 
 	<%= label_tag :analyte %>
-	<%= select_tag :analyte, options_for_select( @analytes ) %>
+	<%= select_tag :analyte, options_for_select( @analytes, @default_analyte ) %>
 
 	<%= label_tag :amount %>
 	<%= text_field_tag :amount %>

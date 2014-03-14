@@ -17,6 +17,7 @@
 		<% end %>
 	</tbody>
 </table>
+<%= link_to "Edit", edit_analyte_group_path( @group ) %>
 
 <h3>Rules</h3>
 <%= render partial: 'rules_table', object: @rules, as: :rules %>

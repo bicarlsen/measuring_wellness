@@ -17,7 +17,10 @@
 				<td class='partitions'>
 					<%= render partial: 'shared/partitions_table', object: rule.partitions,
 						as: :partitions %>
-				</td>
+					</td>
+					<td>
+						<%= link_to 'Edit', edit_rule_path( rule )%>
+					</td>
 			</tr>
 		<% end %>
 	</tbody>

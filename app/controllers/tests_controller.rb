@@ -1,16 +1,24 @@
 class TestsController < ApplicationController
+	before_action :must_be_admin, except: [:index, :show]
+
 	def index
-		@tests = Test.all
+		if current_user.admin?
+			@tests = Test.all
+
+		else
+			@tests = current_user.tests
+		
+		end
 	end
 
 	def show
 		@test = Test.find params[:id]
+		@results = @test.results
 	end
 
 	def new
 		@test = Test.new
 		@users = users_for_select
-		#@selected_user = 0
 		@orders = orders_for_select
 		@analytes = analytes_for_select
 
@@ -40,6 +48,17 @@ class TestsController < ApplicationController
 			render :new
 			return
 		end
+
+		order_id = params[:order]
+
+		# Check if Order already has a test.  If so redirect to edit page.
+		order = Order.find order_id
+		if order.test
+			flash[:error] = "That Order already had Test Results associated with it"
+			@order = order
+			redirect_to edit_test_path( order.test )
+			return
+		end	
 		
 		# Remove Untested Results
 		params[:results].each do |result| 
@@ -49,9 +68,9 @@ class TestsController < ApplicationController
 			end
 		end
 
-		order = params[:order]
-		@test.order_id = order
-		@test.user_id = Order.find( order ).user_id
+	
+		@test.order_id = order_id
+		@test.user_id = Order.find( order_id ).user_id
 		@test.results = @results 
 
 		if @test.save
@@ -66,12 +85,50 @@ class TestsController < ApplicationController
 	end
 
 	def edit
+		@test = Test.find params[:id]
+		@results = @test.results
+		@remaining_analytes = remaining_analytes_for_select( @test )
 	end
 
 	def update
+		@test = Test.find params[:id]
+		@results = @test.results
+		@remaining_analytes = remaining_analytes_for_select( @test )
+
+		if params[:add_result]
+			@test.results.create( 
+				analyte_id: params[:new_analyte], amount: params[:new_amount] 
+			)
+			redirect_to edit_test_path( @test )
+			return
+		end
+
+		params[:results].each do |r|
+			result = Result.find r[:id]
+			unless result.update_attribute :amount, r[:amount]
+				flash.now[:error] = "There was an issue upating the Result"
+				render :edit
+				returns
+			end
+		end
+
+		if @test.save
+			flash[:success] = "Test updated!"
+			redirect_to test_path( @test )
+
+		else
+			flash.now[:error] = "There was an error updating the Test"
+			render :edit
+
+		end
 	end
 
 	def destroy
+		test = Test.find params[:id]
+		test.destroy
+
+		flash[:success] = "Test destroyed!"
+		redirect_to tests_path
 	end
 
 	private
@@ -115,6 +172,19 @@ class TestsController < ApplicationController
 			end
 
 			arr
+		end
+
+		def remaining_analytes_for_select( test )
+			used = test.results
+			used = used.map { |r| r.analyte_id }
+
+			remaining = []
+			Analyte.all.each do |a|
+				remaining << [ a.name, a.id ] unless 
+					used.index( a.id )
+			end 
+
+			remaining
 		end
 
 end

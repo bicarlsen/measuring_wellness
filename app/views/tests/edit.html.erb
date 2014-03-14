@@ -1,0 +1,45 @@
+<h1>Edit Test</h1>
+<%= render 'shared/flash'%>
+
+<h2><%= @test.user.name %></h2>
+<h2><%= "Order #{@test.order.id} | #{@test.order.created_at}" %></h2>
+
+<h2>Results</h2>
+<%= form_tag({ controller: :tests, action: :update }, method: :patch ) do %>
+	<table>
+		<thead>
+			<th>Analyte</th>
+			<th>Amount</th>
+		</thead>
+		<tbody>
+			<% @results.each do |r| %>
+				<tr>
+					<td>
+						<%= r.analyte.name %>
+					</td>
+					<td>
+						<%= hidden_field_tag :id, r.id, name: "results[][id]" %>
+						<%= text_field_tag :amount, r.amount, name: "results[][amount]" %>
+					</td>
+					<td>
+						<%= link_to 'Remove Result', result_path( r ), method: :delete,
+							confirm: "Are you sure you want to delete this Result?" %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<% unless @remaining_analytes.empty? %>
+		<section>	
+			<%= label_tag "Analyte" %>
+			<%= select_tag :new_analyte, options_for_select( @remaining_analytes ) %>
+			<%= text_field_tag :new_amount %>
+			<%= submit_tag 'Add Result', name: :add_result %>
+		</section>
+	<% end %>
+		
+	<%= submit_tag 'Update' %>
+<% end %>
+
+<%= link_to "Cancel", test_path( @test ) %>

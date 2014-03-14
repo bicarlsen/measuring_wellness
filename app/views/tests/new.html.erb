@@ -9,8 +9,8 @@
 	<%= label_tag :order %>
 	<%= select_tag :order, options_for_select( @orders ) %>
 
-	<h2>Results</h2>
-	
+<h2>Results</h2>
+
 	<% @results.each do |result| %>
 		<section>
 			<%= hidden_field_tag :analyte_id, result.analyte_id,

@@ -17,7 +17,9 @@ class AnalyteGroupsController < ApplicationController
 		@group.default_weights = []
 		params[:analyte_group][:default_weights].each do |weight|
 			@group.add_weight(
-				weight[:severity].to_i, weight[:weight].to_i 
+				weight[:severity].to_i, weight[:weight].to_f 
+			) unless (
+				weight[:severity].blank? && weight[:weight].blank?
 			)
 		end
 
@@ -40,9 +42,29 @@ class AnalyteGroupsController < ApplicationController
 	end
 
 	def edit
+		@group = AnalyteGroup.find params[:id]
 	end
 
 	def update
+		@group = AnalyteGroup.find params[:id]
+		@group.update_attributes group_params
+
+		# Add Default Weight
+		if params[:add_weight]
+			@group.add_weight
+			render :edit
+			return
+		end
+
+		if @group.save
+			flash[:success] = "Analyte Group updated!"
+			redirect_to analyte_group_path( @group )
+
+		else
+			flash.now[:error] = "There was an issue updating your Analyte Group"
+			render :edit
+		end
+
 	end
 
 	def destroy

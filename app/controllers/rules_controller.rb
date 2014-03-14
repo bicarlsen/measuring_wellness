@@ -1,6 +1,8 @@
 require 'severity_weight'
 
 class RulesController < ApplicationController
+	include Partitions
+
 	def index
 		@rules = Rule.all
 	end
@@ -49,7 +51,7 @@ class RulesController < ApplicationController
 		# Load Custom
 		params[:partitions].each do |part|
 			@rule.create_partition(
-				part[:severity].to_i, part[:threshold].to_i, part[:weight].to_i
+				part[:severity].to_i, part[:threshold].to_f, part[:weight].to_f
 			)
 		end
 
@@ -57,6 +59,17 @@ class RulesController < ApplicationController
 		if params[:add_partition]
 			@rule.create_partition		
 			render :new
+			return
+		end
+
+		# Rule Already exists
+		previous_rule = Rule.where( 
+			analyte_group_id: @group.id, analyte_id: @analyte.id 
+		)
+		if !previous_rule.empty?
+			flash[:error] = "This Rule already exists"
+			@rule = previous_rule[0]
+			redirect_to edit_rule_path( @rule )
 			return
 		end
 
@@ -72,6 +85,10 @@ class RulesController < ApplicationController
 	end
 
 	def edit
+		@rule = Rule.find params[:id]
+		@partitions = Partition.new @rule.partitions
+		@group = @rule.analyte_group
+		@analyte = @rule.analyte
 	end
 
 	def update

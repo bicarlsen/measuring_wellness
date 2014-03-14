@@ -1,0 +1,14 @@
+<h1>Edit Result</h1>
+<%= render 'shared/flash' %>
+
+<h2><%= @user.name %></h2>
+<h3>Order <%= @order.id %> | <%= @order.created_at %></h3>
+
+<%= form_for @result do |f| %>
+	<%= f.label :amount, @analyte.name %>
+	<%= f.text_field :amount %>
+
+	<%= f.submit %>
+<% end %>
+
+<%= link_to 'Cancel', result_path( @result ) %>

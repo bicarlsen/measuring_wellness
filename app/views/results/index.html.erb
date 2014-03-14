@@ -2,7 +2,7 @@
 <%= link_to "Admin", admin_path %>
 <%= render 'shared/flash' %>
 
-<%= link_to 'Add Result', new_result_path %>
+<%#= link_to 'Add Result', new_result_path %>
 <table>
 	<thead>
 		<th>User</th>
@@ -13,9 +13,9 @@
 	<tbody>
 		<% @results.each do |result| %>
 			<tr>
-				<td><%= result.test.user %></td>
+				<td><%= result.test.user.name %></td>
 				<td><%= result.test.id %></td>
-				<td><%= result.analyte %></td>
+				<td><%= result.analyte.name %></td>
 				<td><%= result.amount %></td>
 			</tr>
 		<% end %>

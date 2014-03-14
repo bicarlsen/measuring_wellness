@@ -7,10 +7,13 @@ class Order < ActiveRecord::Base
 	has_one :test
 	has_many :results, through: :test
 
+	# Validations
 	STATUS = ['recieved', 'authorized', 'processed', 'completed', 'cancelled']
 	validates :status, presence: true, inclusion: { in: STATUS }
 
 	validates :user_id, presence: true
+
+	# Methods
 
 	private
 

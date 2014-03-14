@@ -1,0 +1,7 @@
+<h1>Edit Analyte</h1>
+<%= render 'shared/flash' %>
+
+<h2><%= @analyte.name %></h2>
+<%= render partial: 'analyte_form', object: @analyte, as: :analyte %>
+
+<%= link_to 'Cancel', analyte_path( @analyte ) %>

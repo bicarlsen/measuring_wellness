@@ -1,34 +1,6 @@
 <h1>Create Analyte</h1>
 <%= render 'shared/flash' %>
 
-<%= form_for @analyte do |f| %>
-	<%= f.label :name %>
-	<%= f.text_field :name %>
-
-	<h2>Partitions</h2>
-	<table>
-		<thead>
-			<th>Severity</th>
-			<th>Threshold</th>
-			<th>Weight</th>
-		</thead>
-		<tbody>
-			<% @analyte.partitions.each do |part| %>
-				<tr>
-					<%= f.fields_for 'partitions', part, index: nil do |pf| %>
-						<td><%= pf.text_field :severity %></td>
-						<td><%= pf.text_field :threshold %></td>
-						<td><%= pf.text_field :weight %></td>
-					<% end %>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
-
-	<%= submit_tag  "Add Partition", name: :add_partition %>
-
-	<%= f.submit %>
-<% end %>
-
+<%= render partial: 'analyte_form', object: @analyte, as: :analyte %>
 <%= link_to 'Cancel', analytes_path %>
 
