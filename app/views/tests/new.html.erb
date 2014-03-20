@@ -1,4 +1,4 @@
-<h1>New Test</h1>
+<h1>New Test Results</h1>
 <%=  render 'shared/flash' %>
 
 <%= form_tag controller: :tests, action: :create do %>
@@ -24,7 +24,7 @@
 		</section>
 	<% end %>
 
-	<%= submit_tag 'Create Test' %>
+	<%= submit_tag 'Save Results' %>
 <% end %>
 
 <%= link_to 'Cancel', tests_path %>
