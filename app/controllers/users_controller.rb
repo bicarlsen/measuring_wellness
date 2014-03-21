@@ -62,7 +62,26 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find params[:id]
+		
+		# Only update Profile params
+		if params[:submit_profile]
+			# Update each attribute individually to avoid validation errors
+			# of mass assignment
+			user_profile_params.each do |attr, val|
+				unless @user.update_attribute( attr, val )
+					# Error updating attribute
+					flash.now[:error] = 'There was an error updating your profile'
+					render 'profile'
+					return
+				end
+			end
 
+			# All attributes updated successfully
+			flash[:success] = 'Your profile has been saved'
+			redirect_to root_path
+			return
+		end
+				
 		if @user.update_attributes user_params
 			flash[:success] = 'Your profile has been saved'
 			redirect_to root_path
@@ -79,6 +98,17 @@ class UsersController < ApplicationController
 		def user_params
 			params.require(:user).permit :name, :email, :password, :password_confirmation,
 				:birth_date, :weight, :height, :gender, :terms_of_use
+		end
+
+		def user_profile_params
+			attrs = params.require(:user).permit :weight, :height, :gender 
+			
+			year = 		params[:user]['birth_date(1i)'].to_i
+			month = 	params[:user]['birth_date(2i)'].to_i
+			day = 		params[:user]['birth_date(3i)'].to_i
+			attrs[:birth_date] = Date.new( year, month, day ).to_s
+
+			attrs
 		end
 	
 end
