@@ -4,7 +4,7 @@ class Analyte < ActiveRecord::Base
 	# Callbacks
 	serialize :partitions
 	after_initialize :initialize_partitions
-	before_save { self.partitions.sort! }
+	before_save { self.partitions = PartitionCollection.new self.partitions }
 
 	# Relations
 	has_many :rules

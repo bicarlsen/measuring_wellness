@@ -14,6 +14,12 @@
 				</li>
 
 			<% else # Signed In %>
+				<% if admin?%>
+					<li class='navigation-link'>
+						<%= link_to 'Admin', admin_path %>
+					</li>
+				<% end %>
+
 				<li class='navigation-link'>
 					<%= link_to 'Settings', edit_user_path(current_user) %>
 				</li>

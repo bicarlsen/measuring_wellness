@@ -131,6 +131,19 @@ class TestsController < ApplicationController
 		redirect_to tests_path
 	end
 
+	def evaluate
+		@test = Test.find params[:id]
+		if @test.evaluate
+			flash[:success] = "Test has been evaluated"
+			redirect_to consultation_path params[:id]
+
+		else
+			flash.now[:error] = "There was an error evaluating the Test"
+			render @test
+
+		end
+	end
+
 	private
 
 		def test_params

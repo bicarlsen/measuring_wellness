@@ -37,12 +37,12 @@ module SessionsHelper
 		if signed_in?
 			redirect_to root_path
 		end
-	end
+	end # must_be_signed_out
 	
 	def must_own_resource
 		unless User.find(params[:id]) == current_user
 			redirect_to root_path
 		end
-	end # must_be_current_user
+	end # must_own_resource
 
 end

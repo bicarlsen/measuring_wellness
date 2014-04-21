@@ -8,4 +8,8 @@ class AdminController < ApplicationController
 	def orders
 		@coupons = Coupon.all
 	end
+
+	def users
+		@users = User.all
+	end
 end

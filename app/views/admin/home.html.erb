@@ -1,7 +1,15 @@
 <h1>Admin</h1>
-<%= link_to 'Orders', admin_orders_path %>
-<%= link_to 'Analytes', analytes_path %>
-<%= link_to 'Analyte Groups', analyte_groups_path %>
-<%= link_to 'Rules', rules_path %>
-<%= link_to 'Results', results_path %>
-<%= link_to 'Tests', tests_path %>
+<section>
+	<%= link_to 'Users', admin_users_path %> | 
+	<%= link_to 'Orders', admin_orders_path %> | 
+	<%= link_to 'Analytes', analytes_path %> | 
+	<%= link_to 'Analyte Groups', analyte_groups_path %> | 
+	<%= link_to 'Rules', rules_path %> | 
+	<%#= link_to 'Results', results_path %>
+	<%= link_to 'Tests', tests_path %>
+</section>
+<section>
+	<%= link_to 'Flags', flags_path %> | 
+	<%= link_to 'Recommendations', recommendations_path %>
+</section>
+

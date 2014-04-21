@@ -13,4 +13,14 @@ class Result < ActiveRecord::Base
 		Test.find self.test_id
 	end
 
+	def get_group_severity
+		self
+	end	
+
+	def get_analyte_severity
+		analyte = self.analyte
+		partition = analyte.partitions.get_amount_partition self.amount
+		partition.severity
+	end
+
 end

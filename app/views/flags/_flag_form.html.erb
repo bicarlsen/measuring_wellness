@@ -1,0 +1,44 @@
+<%= form_for @flag do |f| %>
+	<%= render 'shared/form_errors', object: f.object %>
+	
+	<section>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+
+		<%= f.label :active %>
+		<%= f.check_box :active %>
+	</section>
+	
+	<section>
+		<%= f.label :priority %>
+		<%= f.text_field :priority %>
+	</section>
+	
+	<section>
+		<%= f.label :severity %>
+		<span class='tool-tip'>
+			A function using the Flag Algebra.
+		</span>
+		<%= f.text_field :severity %>
+	</section>
+	
+	<section>
+		<%= f.label :trigger %>
+		<span class='tool-tip'>
+			An equation or inequality using the Flag Algebra.
+		</span>
+		
+		<%= f.text_field :trigger %>
+<!--
+		<%= f.text_field :trigger, name: 'flag[trigger][lhs]' %>
+		<%= select_tag :trigger, options_for_select( ['<', '<=', '=', '>=', '>'] ),
+			name: 'flag[trigger][op]' %>
+		<%= f.text_field :trigger, name: 'flag[trigger][rhs]' %>
+-->
+	</section>
+
+	<section>
+		<%= f.submit %>
+	</section>
+
+<% end %>

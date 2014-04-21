@@ -1,0 +1,38 @@
+<h1>Recommendations</h1>
+
+<%= link_to 'New Recommendation', new_recommendation_path %>
+<table>
+	<thead>
+		<th></th>
+		<th>Active</th>
+		<th>Priority</th>
+		<th>Summary</th>
+		<th>Triggers</th>
+		<th></th>
+	</thead>
+	<tbody>
+		<% @recommendations.each do |recommendation| %>
+			<tr class='recommendation'>
+				<td class='recommendation-name'>
+					<%= link_to recommendation.name, 
+								recommendation_path( recommendation ) %>
+				</td>
+				<td class='recommendation-active'>
+					<%= recommendation.active? ? 'Y' : 'N' %>
+				</td>
+				<td class='recommendation-priority'>
+					<%= recommendation.priority %>
+				</td>
+				<td class='recommendation-summary'>
+					<%= recommendation.summary.slice(0, 99) + 
+						( (recommendation.summary.length > 99) ? '...' : '' ) %>
+				</td>
+				<td class='recommendation-triggers'>
+					<%= recommendation.triggers %>
+				</td>
+				<td class='recommendation-actions'>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

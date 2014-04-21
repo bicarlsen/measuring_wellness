@@ -1,6 +1,9 @@
 <h1>Edit Rule</h1>
 <h2><%= @group.name %> | <%= @analyte.name %></h2>
 
+<%= render 'shared/flash' %>
+<%= render partial: 'rule_form' %>
+
 <%= link_to "Cancel", rules_path %>
 
 

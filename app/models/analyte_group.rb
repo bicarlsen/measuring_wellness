@@ -1,3 +1,4 @@
+require 'severity_weight'
 class AnalyteGroup < ActiveRecord::Base
 	# Callbacks
 	serialize :default_weights

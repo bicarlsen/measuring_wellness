@@ -51,7 +51,9 @@ class RulesController < ApplicationController
 		# Load Custom
 		params[:partitions].each do |part|
 			@rule.create_partition(
-				part[:severity].to_i, part[:threshold].to_f, part[:weight].to_f
+				part[:severity].to_i, 
+				resolve_threshold( part[:threshold] ),
+			 	part[:weight].to_f
 			)
 		end
 
@@ -62,23 +64,14 @@ class RulesController < ApplicationController
 			return
 		end
 
-		# Rule Already exists
-		previous_rule = Rule.where( 
-			analyte_group_id: @group.id, analyte_id: @analyte.id 
-		)
-		if !previous_rule.empty?
-			flash[:error] = "This Rule already exists"
-			@rule = previous_rule[0]
-			redirect_to edit_rule_path( @rule )
-			return
-		end
+		redirect_if_duplicate_rule @rule 
 
 		if @rule.save
 			flash[:success] = "Rule created!"
 			redirect_to rules_path
 
 		else
-			flash[:error] = "There was an error creating your Rule"
+			flash.now[:error] = "There was an error creating your Rule"
 			render :new
 		
 		end
@@ -86,12 +79,29 @@ class RulesController < ApplicationController
 
 	def edit
 		@rule = Rule.find params[:id]
-		@partitions = Partition.new @rule.partitions
-		@group = @rule.analyte_group
+		
+		@group = @rule.analyte_group	
+		@groups = analyte_groups_for_select
+		@selected_group = @group.id
+
 		@analyte = @rule.analyte
+		@analytes = analytes_for_select
+		@selected_analyte = @analyte.id
 	end
 
 	def update
+		@rule = Rule.find params[:id]
+
+		if @rule.save
+			flash[:success] = "Rule updated!"
+			redirect_to @rule
+
+		else
+			flash.now[:error] = "There was an error updating your Rule"
+			render :edit
+		
+		end
+	
 	end
 
 	def destroy
@@ -126,6 +136,27 @@ class RulesController < ApplicationController
 			end
 		
 			return analyte_select
+		end
+		
+		def redirect_if_duplicate_rule( rule )
+			group = rule.analyte_group
+			analyte = rule.analyte
+
+			previous_rule = Rule.where( 
+				analyte_group_id: group.id, analyte_id: analyte.id 
+			)
+
+			if !previous_rule.empty?
+				flash[:error] = "This Rule already exists"
+				@rule = previous_rule[0]
+				redirect_to edit_rule_path( @rule )
+				return
+			end
+		end
+
+		def resolve_threshold( str )
+			return Float::INFINITY if str.downcase == 'infinity'
+			str.to_f
 		end
 
 end

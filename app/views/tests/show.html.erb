@@ -3,6 +3,10 @@
 <%= render 'shared/flash' %>
 <h2><%= @test.user.name %></h2>
 <h2><%= "Order #{@test.order.id} | #{@test.order.created_at}" %></h2>
+<%= form_tag controller: :tests, action: :evaluate do %>
+	<%= hidden_field_tag 'test_id', @test.id %>
+	<%= submit_tag 'Evaluate' %>
+<% end %>
 
 <h2>Results</h2>
 <table>

@@ -19,7 +19,9 @@ class AnalytesController < ApplicationController
 		@analyte.partitions = [] # Reset partitions for clean slate
 		params[:analyte][:partitions].each do |part|
 			@analyte.create_partition(
-				part[:severity].to_i, part[:threshold].to_f, part[:weight].to_f
+				part[:severity].to_i, 
+				resolve_threshold( part[:threshold] ), 
+				part[:weight].to_f
 			) unless (
 				part[:severity].blank? && part[:threshold].blank? && part[:weight].blank?
 			)
@@ -54,7 +56,9 @@ class AnalytesController < ApplicationController
 		@analyte.partitions = []
 		params[:analyte][:partitions].each do |part|
 			@analyte.create_partition(
-				part[:severity].to_i, part[:threshold].to_f, part[:weight].to_f
+				part[:severity].to_i, 
+				resolve_threshold( part[:threshold] ), 
+				part[:weight].to_f
 			) unless (
 				part[:severity].blank? && part[:threshold].blank? && part[:weight].blank?
 			)
@@ -91,5 +95,9 @@ class AnalytesController < ApplicationController
 		def analyte_params
 			params.require(:analyte).permit :name
 		end
-
+		
+		def resolve_threshold( str )
+			return Float::INFINITY if str.downcase == 'infinity'
+			str.to_f
+		end
 end

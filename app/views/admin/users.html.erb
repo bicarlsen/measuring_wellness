@@ -1,0 +1,25 @@
+<h1>Users Admin</h1>
+
+<table>
+	<thead>
+		<th></th>
+		<th></th>
+		<th>Roles</th>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+			<tr class='user'>
+				<td class='user-name'><%= user.name %></td>
+				<td class='user-email'><%= user.email %></td>
+				<td class='user-roles'><%= user.roles %></td>
+	<!-- 	<td class='user-actions'>
+					<%= form_for user, controller: :users, action: :update do |f| %>
+						<% f.hidden_field :id %>
+						<% f.select :roles, ['Normal', 'Admin'] %>
+					<% end %>
+	-->
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

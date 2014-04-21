@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140309021238) do
+ActiveRecord::Schema.define(version: 20140417164433) do
 
   create_table "analyte_groups", force: true do |t|
     t.string   "name"
@@ -27,6 +27,31 @@ ActiveRecord::Schema.define(version: 20140309021238) do
     t.text     "partitions"
   end
 
+  create_table "consultations", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "test_id"
+    t.text     "session"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "published"
+  end
+
+  create_table "consultations_recommendations", id: false, force: true do |t|
+    t.integer "consultation_id"
+    t.integer "recommendation_id"
+  end
+
+  create_table "flags", force: true do |t|
+    t.string   "name"
+    t.boolean  "active"
+    t.integer  "priority"
+    t.string   "severity"
+    t.text     "trigger"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "orders", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -38,6 +63,19 @@ ActiveRecord::Schema.define(version: 20140309021238) do
 
   add_index "orders", ["promotion_code"], name: "index_orders_on_promotion_code"
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+
+  create_table "recommendations", force: true do |t|
+    t.string   "name"
+    t.boolean  "active"
+    t.integer  "priority"
+    t.string   "severity"
+    t.text     "summary"
+    t.text     "description"
+    t.string   "products"
+    t.text     "triggers"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "results", force: true do |t|
     t.integer  "test_id"

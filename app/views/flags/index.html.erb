@@ -1,0 +1,25 @@
+<h1>Flags</h1>
+<%= render 'shared/flash' %>
+<%= link_to 'New Flag', new_flag_path %>
+
+<table>
+	<thead>
+		<th></th>
+		<th>Active</th>
+		<th>Priority</th>
+		<th>Severity</th>
+		<th>Trigger</th>
+	</thead>
+	<tbody>
+		<% @flags.each do |flag| %>
+			<tr class='flag'>
+				<td class='flag-name'><%= flag.name %></td>
+				<td class='flag-active'><%= flag.active? ? 'Y' : 'N' %></td>
+				<td class='flag-priority'><%= flag.priority %></td>
+				<td class='flag-severity'><%= flag.severity %></td>
+				<td class='flag-trigger'><%= flag.trigger %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+

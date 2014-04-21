@@ -1,0 +1,40 @@
+<%= form_for @recommendation do |f| %>
+	<%= render 'shared/form_errors', object: f.object %>
+	<%= hidden_field_tag :hidden %>
+	<section>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+
+		<%= f.label :active %>
+		<%= f.check_box :active %>
+	</section>
+	
+	<section>
+		<%= f.label :priority %>
+		<%= f.text_field :priority %>
+	</section>
+	
+	<section>
+		<%= f.label :severity %>
+		<%= f.text_field :severity %>
+	</section>
+	
+	<section>
+		<%= f.label :summary %>
+		<%= f.text_area :summary %>
+	</section>
+	
+	<section>
+		<%= f.label :description %>
+		<%= f.text_area :description %>
+	</section>
+
+	<section>
+		<%= f.label :triggers %>
+		<%= f.text_field :triggers %>
+	</section>
+
+	<section>
+		<%= f.submit %>
+	</section>
+<% end %>

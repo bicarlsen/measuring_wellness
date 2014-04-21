@@ -7,10 +7,12 @@
 <div class='form-container'>
 	<%= render 'shared/flash' %>
 	<%= form_for @order do |f| %>
+	<!--
 		<section class='form-section'>
 			<%= f.label :test_center_id, "Test Center" %>
 			<%= f.select :test_center_id, [['Center 1', 0]] %>
 		</section>
+	-->
 		<section class='form-section'>
 			<%= f.label :promotion_code, 'Redemption Code' %>
 			<%= f.text_field :promotion_code %>
