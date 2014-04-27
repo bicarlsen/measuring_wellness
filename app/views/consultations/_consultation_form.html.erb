@@ -1,0 +1,38 @@
+<%= form_for @consultation do |f| %>
+	<%= f.label :published, 'Publish' %>
+	<%= f.check_box :published %>
+
+	<%= f.label :notes %>
+	<%= f.text_area :notes %>
+
+	<h2>Recommendations</h2>
+	<table>
+		<thead>
+			<th></th>
+			<th>Severity</th>
+			<th>Cause</th>
+		</thead>
+		<tbody>
+			<% @consultation.evaluations.where( removed: false ).each do |ev| %>
+				<tr>
+					<td><%= ev.recommendation.name %></td>
+					<td><%= ev.severity %></td>
+					<td><%= ev.triggers %></td>
+					<td>
+						<%= f.fields_for ev, index: ev.id do |ef| %>
+							<%= ef.label :notes %>
+							<%= ef.text_area :notes %>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to 'Remove', ev, method: :delete %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	
+	<%= link_to 'Add Recommendation', 
+		new_evaluation_path( consultation: @consultation.id ) %>
+	<%= f.submit %>
+<% end %>

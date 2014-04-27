@@ -1,23 +1,25 @@
-class ConsultationSession < ActiveRecord::Base
-	def initialize( test )
-		super
-		self.test = test
-		self.results = test.results
-		self.flags = {}
-		self.recommendations = {}
-	end
+class ConsultationSession
+	attr_reader :results
+	attr_reader :flags
+	attr_reader :recommendations
 
+	def initialize( test )
+		@test = test
+		@results = {}
+		@flags = {}
+		@recommendations = {}
+
+		@test.results.each do |result|
+			@results[result.analyte_id] = result.amount
+		end
+	end
 
 	def add_flag( flag )
-		flags[flag.id] = flag.calculate_severity( results )
+		@flags[flag.id] = flag.calculate_severity( @test )
 	end
 
-	def add_recommendation( rec )
-		flags = # Flags that triggered the Rec
-		severity = rec.calculate_severity()
-		recommendations[rec.id] = { flags: flags, severity: severity }
+	def add_recommendation( rec, triggers )
+		@recommendations[rec.id] = { triggers: triggers, severity: rec.severity }
 	end
-
-	
 
 end

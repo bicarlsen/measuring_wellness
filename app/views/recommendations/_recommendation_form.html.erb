@@ -7,6 +7,11 @@
 
 		<%= f.label :active %>
 		<%= f.check_box :active %>
+
+		<% unless @recommendation.new_record? %>
+			<%= f.label :archived, 'Archive' %>
+			<%= f.check_box :archived %>
+		<% end %>
 	</section>
 	
 	<section>
@@ -30,8 +35,13 @@
 	</section>
 
 	<section>
-		<%= f.label :triggers %>
-		<%= f.text_field :triggers %>
+		<%= f.label :triggers %>	
+		<% @recommendation.triggers.each do |trigger| %> 
+			<%= text_field_tag 'triggers[]', trigger,
+				disabled: ( @recommendation.new_record? ? false : true ) %>
+			<% end %>
+		<%= f.submit( name: :add_trigger, value: 'Add Trigger' ) if
+			@recommendation.new_record? %>
 	</section>
 
 	<section>

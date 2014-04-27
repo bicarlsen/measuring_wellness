@@ -1,55 +1,26 @@
 class TriggerAlgebra
-	attr_accessor :test
-	attr_accessor :analytes
-	attr_accessor :groups
-
+	attr_reader :test
 	attr_reader :term_values
 
-	def initialize( test, data={} )
+	def initialize( test )
 		@test = test
-		
-		@analytes = data[:analytes] || nil
-		@groups = data[:groups] || nil
-		@rules = data[:rules] || nil
-		
-		# Retrieve uninitialized data from database
-		@analytes = Analyte.all unless @analytes
-		@groups = AnalyteGroup.all unless @groups
-		@rules = Rule.all unless @rules
-
 		@term_values = {}
 	end
 
-	# Reuturns the truth value of the equation / inequality
 	def triggered?( equation )
 		eval resolve_equation( equation )
 	end
+
+	def evaluate_expression( exp )
+		eval resolve_expression( exp )
+	end
+
+	def results
+		test.results
+	end
 	
-
-	#--- Class Methods ---
-	def get_analyte_ids( trigger_eq )
-		get_variable_ids( trigger_eq )[:analyte]
-	end
-
-	def get_group_ids( trigger_eq )
-		get_variable_ids( trigger_eq )[:group]
-	end
-
-	# Returns an array of Trigger Variables that are included in the trigger
-	def get_variable_ids( trigger_eq )
-		ids = {}
-		
-		VARIABLE_PATTERNS.each do |type, pattern|
-			captured_ids = trigger_eq.scan pattern
-			captured_ids.map! { |id| id[0].to_i }
-			ids[type] = captured_ids
-		end
-
-		return ids
-	end                           
-
-#	private
-		EQUALITY_PATTERN = Regexp.new '>=|<=|!=|>|<|='
+	private
+		EQUALITY_PATTERN = Regexp.new '>=|<=|!=|>|<|=='
 
 		ANALYTE_PATTERN = Regexp.new 'Analyte\((\d+)\)'
 		GROUP_PATTERN 	= Regexp.new 'Group\((\d+)\)'
@@ -170,7 +141,7 @@ class TriggerAlgebra
 			group_id = GROUP_PATTERN.match( identifier )[1].to_i	
 			analyte_id = ANALYTE_PATTERN.match( identifier )[1].to_i
 
-			@rules.each do |rule|
+			Rule.all.each do |rule|
 				return rule if 
 					rule.analyte_group_id == group_id && rule.analyte_id == analyte_id
 			end
@@ -178,16 +149,14 @@ class TriggerAlgebra
 
 		def resolve_group_identifier( identifier )
 			group_id = GROUP_PATTERN.match( identifier )[1].to_i
-			@groups.each do |group|
+			AnalyteGroup.all.each do |group|
 				return group if group.id == group_id
 			end
 		end
 
 		def	resolve_analyte_identifier( identifier )
 			analyte_id = ANALYTE_PATTERN.match( identifier )[1].to_i
-			@analytes.each do |analyte|
-				return analyte if analyte.id == analyte_id
-			end
+			Analyte.find analyte_id
 		end
 
 		#--- Rule Functions ---

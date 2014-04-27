@@ -125,21 +125,29 @@ class TestsController < ApplicationController
 
 	def destroy
 		test = Test.find params[:id]
-		test.destroy
+		
+		if test.consultation
+			flash.now[:error] = 'You can not delete this Test, it has already been evaluated.'
+			render test
+		
+		else	
+			test.destroy
 
-		flash[:success] = "Test destroyed!"
-		redirect_to tests_path
+			flash[:success] = "Test destroyed!"
+			redirect_to tests_path
+		
+		end
 	end
 
 	def evaluate
 		@test = Test.find params[:id]
 		if @test.evaluate
 			flash[:success] = "Test has been evaluated"
-			redirect_to consultation_path params[:id]
+			redirect_to edit_consultation_path( @test.consultation )
 
 		else
 			flash.now[:error] = "There was an error evaluating the Test"
-			render @test
+			redirect_to @test
 
 		end
 	end

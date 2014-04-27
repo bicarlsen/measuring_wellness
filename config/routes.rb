@@ -1,12 +1,12 @@
 MeasuringWellness::Application.routes.draw do
 	# Resources
 	resources :users
-	resources :sessions, only: [:new, :create, :destroy]
+	resources :sessions, only: [ :new, :create, :destroy ]
 	resources :orders
-	resources :recommendations, except: [:new]	
+	resources :recommendations, except: [ :new ]	
 
 	# Admin
-	resources :coupons, only: [:new, :create, :destroy], path: '/admin/coupon'
+	resources :coupons, only: [ :new, :create, :destroy ], path: '/admin/coupon'
 	resources :analytes, path: '/admin/analyte'
 	resources :analyte_groups, path: '/admin/analyte_group'
 	resources :rules, path: '/admin/rule'
@@ -17,9 +17,11 @@ MeasuringWellness::Application.routes.draw do
 	# Rules Engine
 	resources :flags, path: '/admin/flag'
 	resources :recommendations, path: 'admin/recommendation'
-	resources :consultations, path: 'admin/consultation', except: [:new]
-	resources :consultation_sessions, path: 'admin/consultation_sessions',
-							only: [:create, :update]
+	resources :evaluations, path: 'admin/evaluation', 
+		except: [ :index ]
+	resources :consultations, path: 'admin/consultation', 
+		only: [ :edit, :update, :destroy ]
+
 	# Root
  	root 'home_pages#index'	
  

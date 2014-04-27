@@ -1,0 +1,14 @@
+<%= form_for @evaluation do |f| %>
+	<%= f.hidden_field :consultation, value:@consultation.id %>
+
+	<%= f.label :recommendation %>
+	<%= f.select :recommendation, options_for_select( @recommendations ) %>
+
+	<%= f.label :severity %>
+	<%= f.text_field :severity %>
+
+	<%= f.label :notes %>
+	<%= f.text_area :notes %>
+
+	<%= f.submit %>
+<% end %>

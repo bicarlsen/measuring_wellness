@@ -1,0 +1,16 @@
+<h1>Consultation</h1>
+<div>
+	<div>
+		<h2>User</h2>
+		<%= @consultation.user.name %>
+	</div>
+	<div>
+		<h2>Test</h2>
+		Order <%= @consultation.test.order.id %> | <%= @consultation.test.created_at %>
+	</div>
+</div>
+<div>
+	<%= render partial: 'consultation_form'%>
+</div>
+
+

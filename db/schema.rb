@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417164433) do
+ActiveRecord::Schema.define(version: 20140426024322) do
 
   create_table "analyte_groups", force: true do |t|
     t.string   "name"
@@ -37,9 +37,15 @@ ActiveRecord::Schema.define(version: 20140417164433) do
     t.boolean  "published"
   end
 
-  create_table "consultations_recommendations", id: false, force: true do |t|
-    t.integer "consultation_id"
-    t.integer "recommendation_id"
+  create_table "evaluations", force: true do |t|
+    t.integer  "recommendation_id"
+    t.integer  "consultation_id"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "triggers"
+    t.float    "severity"
+    t.boolean  "removed",           default: false
   end
 
   create_table "flags", force: true do |t|
@@ -50,6 +56,7 @@ ActiveRecord::Schema.define(version: 20140417164433) do
     t.text     "trigger"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "archived"
   end
 
   create_table "orders", force: true do |t|
@@ -75,6 +82,7 @@ ActiveRecord::Schema.define(version: 20140417164433) do
     t.text     "triggers"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "archived"
   end
 
   create_table "results", force: true do |t|

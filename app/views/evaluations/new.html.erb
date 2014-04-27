@@ -1,0 +1,6 @@
+<h1>New Recommendation</h1>
+<h2>For <%= @user.name %></h2>
+
+<%= render partial: 'evaluation_form' %>
+
+<%= link_to 'Cancel', edit_evaluation_path( @evaluation ) %>

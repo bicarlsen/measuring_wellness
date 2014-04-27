@@ -13,7 +13,7 @@
 	<tbody>
 		<% @flags.each do |flag| %>
 			<tr class='flag'>
-				<td class='flag-name'><%= flag.name %></td>
+				<td class='flag-name'><%= link_to flag.name, edit_flag_path( flag ) %></td>
 				<td class='flag-active'><%= flag.active? ? 'Y' : 'N' %></td>
 				<td class='flag-priority'><%= flag.priority %></td>
 				<td class='flag-severity'><%= flag.severity %></td>

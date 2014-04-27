@@ -2,7 +2,7 @@ class FlagsController < ApplicationController
 	before_action :must_be_admin
 	
 	def index
-		@flags = Flag.all
+		@flags = Flag.where archived: false
 	end
 
 	def show
@@ -29,12 +29,31 @@ class FlagsController < ApplicationController
 	end
 
 	def edit
+		@flag = Flag.find params[:id]
 	end
 
 	def update
+		@flag = Flag.find params[:id]
+		if @flag.update_attributes flag_edit_params
+			flash[:success] = 'Flag has been updated!'
+			redirect_to @flag
+
+		else
+			flash.now[:error] = 'There was an issue updating the Flag'
+			render:edit
+
+		end
 	end
 
+	# Never delete flag info
+	# Save it for later analysis
 	def destroy
+		flag = Flag.find params[:id]
+		flag.update_attribute :archived, true
+		flag.update_attribute :active, false
+
+		flash[:success] = 'Flag archived.'
+		redirect_to flags_path
 	end
 
 	private
@@ -43,4 +62,7 @@ class FlagsController < ApplicationController
 			params.require( :flag ).permit :name, :active, :priority, :severity, :trigger
 		end
 
+		def flag_edit_params
+			params.require( :flag ).permit :name, :active, :priority, :severity, :archived
+		end
 end

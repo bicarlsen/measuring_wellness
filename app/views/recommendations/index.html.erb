@@ -15,7 +15,7 @@
 			<tr class='recommendation'>
 				<td class='recommendation-name'>
 					<%= link_to recommendation.name, 
-								recommendation_path( recommendation ) %>
+								edit_recommendation_path( recommendation ) %>
 				</td>
 				<td class='recommendation-active'>
 					<%= recommendation.active? ? 'Y' : 'N' %>
