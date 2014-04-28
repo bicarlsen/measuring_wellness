@@ -8,9 +8,10 @@ class OrdersController < ApplicationController
 
 		else
 			@orders = current_user.orders
-			@orders.order(created_at: :desc)
+		
+		end
 
-		end	
+		@orders.order(created_at: :asc)	
 	end # index
 
 	def show

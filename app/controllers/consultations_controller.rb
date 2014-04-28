@@ -10,6 +10,16 @@ class ConsultationsController < ApplicationController
 
 	def show
 		@consultation = Consultation.find params[:id]
+		
+		unless @consultation.published
+			flash[:error] = "We're sorry, this Consultation has not been made available yet."
+			redirect_to orders_path
+		end
+		
+		@evaluations = @consultation.evaluations.where( removed: false )
+		@test = Test.find @consultation.test_id
+		@results = @test.results
+		@order = Order.find @test.order_id
 	end
 
 	def create

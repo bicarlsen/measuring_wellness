@@ -12,6 +12,9 @@ class RecommendationsController < ApplicationController
 	def new
 		@recommendation = Recommendation.new
 		@recommendation.active = true
+
+		# Remove
+		@flags = Flag.where active: true
 	end
 
 	def create
@@ -21,12 +24,20 @@ class RecommendationsController < ApplicationController
 			@recommendation.triggers << trigger
 		end
 
+		if params[:add_trigger]
+			@recommendation.triggers << []
+			@flags = Flag.where active: true # Remove
+			render :new
+			return
+		end
+
 		if @recommendation.save
 			flash[:success] = "Recommendation created!"
 			redirect_to recommendations_path
 
 		else
 			flash.now[:error] = "There was an error creating your Recommendation"
+			@flags = Flag.where active: true # Remove
 			render :new
 
 		end

@@ -20,7 +20,7 @@ MeasuringWellness::Application.routes.draw do
 	resources :evaluations, path: 'admin/evaluation', 
 		except: [ :index ]
 	resources :consultations, path: 'admin/consultation', 
-		only: [ :edit, :update, :destroy ]
+		only: [ :show, :edit, :update, :destroy ]
 
 	# Root
  	root 'home_pages#index'	

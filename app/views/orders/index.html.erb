@@ -16,6 +16,7 @@
 		<% i += 1 %>
 		<tr class='order'>
 			<td class='index'><%= i %></td>
+			
 			<% if is_admin %>
 				<td class='order-info user-id'>
 					<%= order.user_id %>
@@ -24,10 +25,18 @@
 					<%= link_to order.user.name, user_path(order.user) %>
 				</td>
 			<% end%>
+
 			<td class='order-info created-at'>
 				<%= order.created_at.to_date.strftime '%m/%d/%Y' %>
 			</td>
 			<td class='order-info test-center'><%= order.test_center_id %></td>
+
+			<% if ( order.test && 
+						( consultation = order.test.consultation ) && 
+						consultation.published? ) %>
+				<td><%= link_to 'Results', consultation %></td>
+			<% end %>
+
 		</tr>
 	<% end %>
 </table>

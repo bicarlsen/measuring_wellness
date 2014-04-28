@@ -4,4 +4,103 @@
 <%= render partial: 'flag_form' %>
 <%= link_to 'Cancel', flags_path %>
 
+<div>
+	<h3>ID Lookup</h3>
+	<table>
+		<thead>
+			<th>Analyte</th>
+		</thead>
+		<tbody>
+			<% @analytes.each do |analyte| %>
+				<tr>
+					<td><%= analyte.name %></td>
+					<td><%= analyte.id %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<table>
+		<thead>
+			<th>Group</th>
+		</thead>
+		<tbody>
+			<% @groups.each do |group| %>
+				<tr>
+					<td><%= group.name %></td>
+					<td><%= group.id %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+
+<div>
+	<h2>Guide</h2>
+	<h3>Operators</h3>
+	<ul>
+		<li><strong>+</strong>: Addtion</li>
+		<li><strong>-</strong>: Subtraction</li>
+		<li><strong>*</strong>: Multiplication</li>
+		<li><strong>/</strong>: Division</li>
+		<li><strong>**</strong>: Exponentiation</li>
+		<li><strong>()</strong>: Grouping</li>
+	</ul>
+
+	<ul>
+		<li><strong>&gt;=</strong>: Greater than or Equal to</li>	
+		<li><strong>&gt;</strong>: Greater than</li>
+		<li><strong>&lt;</strong>: Less than</li>
+		<li><strong>&lt;</strong>: Less than or Equal to</li>
+		<li><strong>==</strong>: Equal to</li>
+		<li><strong>!=</strong>: Not Equal to</li>
+	</ul>
+
+	<h3>Properties</h3>
+	<h4>Analytes</h4>
+	<ul>
+		<li><strong>Analyte(id).amount</strong>: The amount of the specified 
+			Analyte measured in this Test</li>
+		<li><strong>Analyte(id).severity</strong>: The severity of the specified 
+			Analyte using the Analyte's independent Threshold setup</li>
+	</ul>
+
+	<h4>Groups</h4>
+	<ul>
+		<li><strong>Group(id).amount</strong>: The sum over all the Analyte's  
+			measured amounts in the specified Group</li>
+		<li><strong>Group(id).severity</strong>: The sum over all the Rules'
+			severites in the Group</li>
+		<li><strong>Group(id).weighted_amount</strong>: The weighted sum over all the 
+			Analyte's measured amounts</li>
+		<li><strong>Group(id).weighted_severity</strong>: The weighted sume over all the
+			Rule's severities</li>
+	</ul>
+
+	<h4>Rules</h4>
+	<ul>
+		<li><strong>Group(id).Analyte(id).weight</strong>: The Rule's weight</li>
+		<li><strong>Group(id).Analyte(id).severity</strong>: The Rule's calculated 
+			severity</li>
+		<li><strong>Group(id).Analyte(id).weighted_amount</strong>: The Analyte's 
+			mesured amount multiplied by the Rule's weight</li>
+		<li><strong>Group(id).Analyte(id).weighted_severity</strong>: The Rule's 
+			calculated severity multiplied by the Rule's weight</li>
+	</ul>
+
+	<h3>Severities</h3>
+	<p>
+		A severity is a Function using the Operators and Properties described above
+		as well as constants ( e.g. Analyte(5).amount * 2 + Group(3).Analyte(6).severity )
+	</p>
+
+	<h3>Triggers</h3>
+	<p>
+		A trigger is an Equation using the Operators and Properties described above
+		as well as constants 
+		( e.g. Analyte(12).severity &lt; Group(4).Analyte(6).severity / Analyte(4).severity )
+	</p>
+</div>
+
+
 

@@ -2,6 +2,7 @@ class Recommendation < ActiveRecord::Base
 	# Callbacks
 	serialize :triggers
 	after_initialize { self.triggers ||= [''] }
+	before_save { self.archived ||= false }
 
 	# Relations
 	has_many :evaluations

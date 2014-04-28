@@ -12,6 +12,10 @@ class FlagsController < ApplicationController
 	def new
 		@flag = Flag.new
 		@flag.active = true
+
+		# Remove
+		@analytes = Analyte.all
+		@groups = AnalyteGroup.all
 	end
 
 	def create

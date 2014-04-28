@@ -3,3 +3,40 @@
 <%= render partial: 'shared/flash' %>
 <%= render partial: 'recommendation_form' %>
 <%= link_to 'Cancel', recommendations_path %>
+
+<div>
+	<h2>Flag Lookup</h2>
+	<table>
+		<thead>
+			<th>Flag</th>
+		</thead>
+		<tbody>
+			<% @flags.each do |flag| %>
+				<tr>
+					<td><%= flag.name %></td>
+					<td><%= flag.id %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<h2>Guide</h2>
+	<h3>Severity</h3>
+	<p>
+		As of now, the Severity can only be a constant ( e.g. 4 )
+	</p>
+
+	<h3>Triggers</h3>
+	<p>
+		Flags are specified as <strong>Flag(id)</strong>. Within a Trigger, Flags can be
+		seperated using an delimeter you choose - a simple SPACE is recommended  
+		( e.g. Flag(2) Flag(12) Flag(14) )
+	</p>
+	<p>
+		Each Trigger consists of a group of Flags which all must be present for that Trigger
+		to activate.  Each Trigger is ANDed together with the rest of the Triggers.  This 
+		means that all the Flags in at least 1 Trigger group must be activated for this 
+		Recommendation to become active.
+	</p>
+</div>
+

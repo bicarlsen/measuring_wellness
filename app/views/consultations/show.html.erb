@@ -1,0 +1,43 @@
+<h1>Consultation</h1>
+<h2>Order <%= @order.created_at %></h2>
+
+<h2>Recommendations</h2>
+<table>
+	<tbody>
+		<% @evaluations.each do |evaluation| %>
+			<% recommendation = evaluation.recommendation %>
+			<tr>
+				<td>
+					<%= recommendation.name %>
+				</td>
+				<td>
+					<%= recommendation.description %>
+				</td>
+				<td>
+					<%= evaluation.notes %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<h3>Notes</h3>
+<%= @consultation.notes %>
+
+<h2>Results</h2>
+<table>
+	<thead>
+		<th>Analyte</th>
+		<th>Amount</th>
+	</thead>
+	<tbody>
+		<% @results.each do |result| %>
+			<tr>
+				<td><%= Analyte.find( result.analyte_id ).name %></td>
+				<td><%= result.amount %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+
