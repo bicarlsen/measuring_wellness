@@ -6,7 +6,6 @@ class Flag < ActiveRecord::Base
 
 	# Validations
 	validates :name, presence: true, uniqueness: true
-	validates :active, presence: true
 	validates :priority, presence: true
 	validates :severity, presence: true
 	validates :trigger, presence: true

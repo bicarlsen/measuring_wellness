@@ -7,11 +7,6 @@
 
 		<%= f.label :active %>
 		<%= f.check_box :active %>
-
-		<% unless @flag.new_record? %>
-			<%= f.label :archived, 'Archive' %>
-			<%= f.check_box :archived %>
-		<% end %>
 	</section>
 	
 	<section>
@@ -45,6 +40,11 @@
 
 	<section>
 		<%= f.submit %>
+		<% unless @flag.new_record? %>
+			<%= link_to 'Delete', @flag, method: :delete, 
+				confirm: 'Are you sure you want to archive this Flag?' %>
+		<% end %>
+	
 	</section>
 
 <% end %>

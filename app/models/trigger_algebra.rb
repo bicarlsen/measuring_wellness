@@ -19,14 +19,12 @@ class TriggerAlgebra
 		test.results
 	end
 	
-	private
+#	private
 		EQUALITY_PATTERN = Regexp.new '>=|<=|!=|>|<|=='
 
 		ANALYTE_PATTERN = Regexp.new 'Analyte\((\d+)\)'
 		GROUP_PATTERN 	= Regexp.new 'Group\((\d+)\)'
-		RULE_PATTERN  = Regexp.new(
-			"#{GROUP_PATTERN}.#{ANALYTE_PATTERN}"
-		)
+		RULE_PATTERN  = Regexp.new "#{GROUP_PATTERN}.#{ANALYTE_PATTERN}"
 
 		IDENTIFIER_PATTERN = Regexp.new(
 			"#{ANALYTE_PATTERN}|#{GROUP_PATTERN}" 
@@ -62,7 +60,7 @@ class TriggerAlgebra
 		TERM_PATTERN = Regexp.new(
 			"#{ANALYTE_TERM_PATTERN}|#{GROUP_TERM_PATTERN}|#{RULE_TERM_PATTERN}"
 		)
-
+	
 		#--- Resolutions ---
 
 		def resolve_equation( eq )
@@ -78,9 +76,11 @@ class TriggerAlgebra
 		def resolve_expression( exp )
 			while (match = TERM_PATTERN.match exp)
 				start = match.begin 0
-				exp.slice! start, match[0].length # Remove current match 
+				
+				# Replace expression with value
+				exp.slice! start, match[0].length 
 				resolved_term = resolve_term match[0]
-				exp.insert start, resolved_term.to_s
+				exp.insert start, resolved_term.to_s 
 			end
 
 			exp
@@ -138,24 +138,18 @@ class TriggerAlgebra
 		#--- Idenitifer Resolustion ---
 		
 		def resolve_rule_identifier( identifier )
-			group_id = GROUP_PATTERN.match( identifier )[1].to_i	
-			analyte_id = ANALYTE_PATTERN.match( identifier )[1].to_i
-
-			Rule.all.each do |rule|
-				return rule if 
-					rule.analyte_group_id == group_id && rule.analyte_id == analyte_id
-			end
+			group_id = GROUP_PATTERN.match( identifier )[1]
+			analyte_id = ANALYTE_PATTERN.match( identifier )[1]
+			Rule.where analyte_group_id: group_id, analyte_id: analyte_id
 		end
 
 		def resolve_group_identifier( identifier )
-			group_id = GROUP_PATTERN.match( identifier )[1].to_i
-			AnalyteGroup.all.each do |group|
-				return group if group.id == group_id
-			end
+			group_id = GROUP_PATTERN.match( identifier )[1]
+			AnalyteGroup.find group_id
 		end
 
 		def	resolve_analyte_identifier( identifier )
-			analyte_id = ANALYTE_PATTERN.match( identifier )[1].to_i
+			analyte_id = ANALYTE_PATTERN.match( identifier )[1]
 			Analyte.find analyte_id
 		end
 
@@ -251,7 +245,8 @@ class TriggerAlgebra
 			partition.severity
 		end
 
-end
+
+end # TriggerAlgebra
 
 
 class TriggerAlgebraError < StandardError

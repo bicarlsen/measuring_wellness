@@ -62,7 +62,7 @@ class RecommendationsController < ApplicationController
 	end
 
 	def destroy
-		rec = Recommendation.find param[:id]
+		rec = Recommendation.find params[:id]
 		rec.update_attribute :archived, true
 		rec.update_attribute :active, false
 
