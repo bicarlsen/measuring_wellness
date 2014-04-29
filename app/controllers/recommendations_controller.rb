@@ -52,7 +52,7 @@ class RecommendationsController < ApplicationController
 
 		if @recommendation.update_attributes recommendation_edit_params
 			flash[:success] = 'Recommendation updated!'
-			redirect_to recommendations_path
+			redirect_to edit_recommendation_path( @recommendation )
 
 		else
 			flash.now[:error] = 'There was an error updating the Recommendation'

@@ -40,11 +40,11 @@ class FlagsController < ApplicationController
 		@flag = Flag.find params[:id]
 		if @flag.update_attributes flag_edit_params
 			flash[:success] = 'Flag has been updated!'
-			redirect_to @flag
+			redirect_to edit_flag_path( @flag )
 
 		else
 			flash.now[:error] = 'There was an issue updating the Flag'
-			render:edit
+			render :edit
 
 		end
 	end
