@@ -17,7 +17,7 @@
 				name: "[results][][analyte_id]" %>
 
 			<%= label_tag :amount, "#{result.analyte.name} Amount" %>
-			<%= text_field_tag :amount, nil, name: "[results][][amount]" %>
+			<%= text_field_tag :amount, result.amount, name: "[results][][amount]" %>
 			
 			<%= check_box_tag "[results][][not_tested]" %>
 			<%= label_tag :not_tested, "Analyte Not Tested" %>
