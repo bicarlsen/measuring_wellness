@@ -15,7 +15,7 @@ class EvaluationsController < ApplicationController
 	 	evaluation.update_attribute( 
 			:recommendation, Recommendation.find( params[:evaluation][:recommendation] ))
 		evaluation.update_attribute :notes, params[:evaluation][:notes]
-		evalutaion.update_attribute :severity, params[:evaluation][:severity]
+		evaluation.update_attribute :severity, params[:evaluation][:severity]
 		evaluation.update_attribute :triggers, 'Added Manually'
 
 		if evaluation.save

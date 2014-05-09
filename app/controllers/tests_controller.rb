@@ -24,7 +24,7 @@ class TestsController < ApplicationController
 
 		@results = []
 		Analyte.all.each do |a|
-			@results << @test.results.build( analyte_id: a.id	)
+			@results << @test.results.build( analyte_id: a.id, amount: 0 )
 		end
 	end
 
@@ -33,7 +33,7 @@ class TestsController < ApplicationController
 		
 		@users = users_for_select
 		@user = ( params.has_key?( :user ) ? User.find( params[:user] ) : nil )
-		@selected_user = @user.nil? ? @user.id : 0
+		@selected_user = @user.nil? ? 0 : @user.id
 		@orders = @user ? orders_for_select( @user ) : orders_for_select
 		@analytes = analytes_for_select
 		@results = []
@@ -63,7 +63,7 @@ class TestsController < ApplicationController
 		# Remove Untested Results
 		params[:results].each do |result| 
 			@results.delete_if do |r|
-				( r.analyte_id == result[:analyte_id].to_i )
+				( r.analyte_id == result[:analyte_id].to_i ) &&
 				( result[:not_tested] || result[:amount].empty? )
 			end
 		end
@@ -76,7 +76,7 @@ class TestsController < ApplicationController
 		if @test.save
 			flash[:success] = "Test Results saved!"
 			redirect_to tests_path
-		
+			
 		else
 			flash.now[:error] = "There was an issue creating the Test"
 			render :new

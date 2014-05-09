@@ -8,7 +8,13 @@ class TriggerAlgebra
 	end
 
 	def triggered?( equation )
-		eval resolve_equation( equation )
+		if is_quantified? equation
+			resolve_quantified_equation equation
+		
+		else
+			eval resolve_equation( equation )
+		
+		end
 	end
 
 	def evaluate_expression( exp )
@@ -16,12 +22,13 @@ class TriggerAlgebra
 	end
 
 	def results
-		test.results
+		@test.results
 	end
 	
 #	private
 		EQUALITY_PATTERN = Regexp.new '>=|<=|!=|>|<|=='
-
+	
+		#--- Object Patterns ---
 		ANALYTE_PATTERN = Regexp.new 'Analyte\((\d+)\)'
 		GROUP_PATTERN 	= Regexp.new 'Group\((\d+)\)'
 		RULE_PATTERN  = Regexp.new "#{GROUP_PATTERN}.#{ANALYTE_PATTERN}"
@@ -37,6 +44,7 @@ class TriggerAlgebra
 			"#{IDENTIFIER_PATTERN}|#{QUALIFIED_IDENTIFIER_PATTERN}"
 		)
 
+		#--- Property Patterns ---
 		ANALYTE_PROPERTY_PATTERN = Regexp.new(
 			'amount|severity'
 		)
@@ -47,6 +55,7 @@ class TriggerAlgebra
 			'weighted_amount|weighted_severity|weight|severity'
 		)
 
+		#--- Term Patterns ---
 		ANALYTE_TERM_PATTERN = Regexp.new(
 			"#{ANALYTE_PATTERN}.#{ANALYTE_PROPERTY_PATTERN}"
 		)
@@ -60,9 +69,172 @@ class TriggerAlgebra
 		TERM_PATTERN = Regexp.new(
 			"#{ANALYTE_TERM_PATTERN}|#{GROUP_TERM_PATTERN}|#{RULE_TERM_PATTERN}"
 		)
+
+		#--- Equation + Expression Patterns ---
+		EXPRESSION_PATTERN = Regexp.new(
+			"(?:#{TERM_PATTERN}|\\d|[^=<>!])+"
+		)
+		EQUATION_PATTERN = Regexp.new(
+			"#{EXPRESSION_PATTERN}\\s?#{EQUALITY_PATTERN}\\s?#{EXPRESSION_PATTERN}"
+		)
+
+		#--- Quantifier Patterns ---
+		UNQUANTIFIED_ANALYTE_PATTERN =  Regexp.new 'Analyte'
+		UNQUANTIFIED_GROUP_PATTERN = Regexp.new 'Group'
+		UNQUANTIFIED_RULE_PATTERN = Regexp.new 'Group\(\d+\)\.Analyte'
+		UNQUANTIFIED_OBJECT_PATTERN = Regexp.new(
+			"#{UNQUANTIFIED_RULE_PATTERN}|" + 
+			"#{UNQUANTIFIED_ANALYTE_PATTERN}|#{UNQUANTIFIED_GROUP_PATTERN}"
+		)
+
+		IDENTIFIER_VARIABLE_PATTERN = Regexp.new( 
+			"(\\w+):(#{UNQUANTIFIED_OBJECT_PATTERN})"
+		)			
+		THERE_EXISTS_PATTERN = Regexp.new( 
+			"ThereExists\\(#{IDENTIFIER_VARIABLE_PATTERN}?" +
+			"(?:\\s#{IDENTIFIER_VARIABLE_PATTERN})*\\)"
+		)
+		FOR_ALL_PATTERN = Regexp.new(
+			"ForAll\\(#{IDENTIFIER_VARIABLE_PATTERN}?" +
+			"(?:\\s#{IDENTIFIER_VARIABLE_PATTERN})*\\)"
+		)
+		QUANTIFIER_PATTERN = Regexp.new "#{THERE_EXISTS_PATTERN}|#{FOR_ALL_PATTERN}"
+		QUANTIFIED_EXPRESSION = Regexp.new( 
+			"#{QUANTIFIER_PATTERN}\\[.*\\]"
+		)
+		QUANTIFIED_EQUATION = Regexp.new(
+			"#{QUANTIFIER_PATTERN}\\[(.*)\\]"
+		)
+		QUANTIFIED_STATEMENT = Regexp.new(
+			"#{QUANTIFIED_EQUATION}|#{QUANTIFIED_EXPRESSION}"
+		)
+
+		#--- Quantifiers ---
+
+		def is_quantified?( statement )
+			QUANTIFIER_PATTERN.match( statement )? true : false
+		end
+
+		def resolve_quantified_equation( equation )
+			resolved_equations = []
+			offset = 0
+
+			while QUANTIFIER_PATTERN.match equation, offset 
+				eq_pattern = Regexp.new( "#{QUANTIFIER_PATTERN}\\[(.*)\\]" )
+				quantified_statement = eq_pattern.match equation
+				
+				resolved_statements = build_quantified_list quantified_statement[0]
+				resolved_statements.each do |statement|
+					statement_start = quantified_statement.begin 0
+					resolved_equation = String.new equation
+					resolved_equation.slice! statement_start, quantified_statement[0].length
+					resolved_equation.insert statement_start, statement
+
+					resolved_equations << resolved_equation
+				end
+
+				offset = quantified_statement.end( 0 )
+			end
+
+			return there_exists resolved_equations if
+				THERE_EXISTS_PATTERN.match equation
+
+			return for_all resolved_equations if
+				FOR_ALL_PATTERN.match equation
+		end
+
+		def build_quantified_list( statement )
+			quantified_variables = []
+			offset = 0
+			while (match = IDENTIFIER_VARIABLE_PATTERN.match( statement, offset ))
+				quantified_variables << [ match[1], match[2] ]
+				offset = match.end 0
+			end
+
+			raw_statement = Regexp.new( "#{QUANTIFIER_PATTERN}\\[(.*)\\]" ).
+				match( statement ).captures.last
+
+			resolve_identifier_variables quantified_variables, [raw_statement]
+		end
+
+		def resolve_identifier_variables( variables, statements )
+			# Base Case
+			return statements if variables.empty?
+			
+			# Recursive Case
+			var = variables.pop
+			var_name = var[0]
+			var_type = var[1]
+			var_term_pattern = quantified_term_regexp var_name, var_type
+
+			if UNQUANTIFIED_ANALYTE_PATTERN.match var_type
+				objects = @test.analytes
+
+			elsif UNQUANTIFIED_GROUP_PATTERN.match var_type
+				objects = []
+				AnalyteGroup.all.each do |group|
+					objects << group if !( group.analytes & @test.analytes ).empty? 
+				end
+				
+			elsif (match = UNQUANTIFIED_RULE_PATTERN.match var_type)
+				objects = AnalyteGroup.find( match[1] ).rules
+				
+			end
+
+			new_statements = []
+			statements.each do |statement|
+				objects.each do |obj|
+					resolved_statement = String.new statement
+					offset = 0
+
+					while (match = var_term_pattern.match resolved_statement, offset)
+						start = match.begin 0
+
+						resolved_statement.slice! start, var_name.length
+						resolved_term = var_type + "(#{obj.id})"
+						resolved_statement.insert start, resolved_term
+
+						offset = start + resolved_term.length
+					end	
+
+					new_statements	<< resolved_statement
+				end
+			end
+
+			resolve_identifier_variables( variables, new_statements )
+		end
 	
+		def quantified_term_regexp( name, type )
+			case type
+			when 'Analyte'
+				prop_pattern = ANALYTE_PROPERTY_PATTERN
+			when 'Group'
+				prop_pattern = GROUP_PROPERTY_PATTERN
+			when /Group\(\d+\).Analyte/
+				prop_pattern = RULE_PROPERTY_PATTERN
+			end
+
+			Regexp.new "\\b#{name}\\.#{prop_pattern}\\b"
+		end
+			
 		#--- Resolutions ---
 
+		def there_exists( equations )
+			equations.each do |eq|
+					return true if triggered? eq
+			end
+
+			return false
+		end
+
+		def for_all( equations )
+			equations.each do |eq|
+				return false unless triggered? eq
+			end
+
+			return true
+		end
+		
 		def resolve_equation( eq )
 			eq_match = EQUALITY_PATTERN.match eq
 			parts = eq.split EQUALITY_PATTERN
@@ -140,7 +312,7 @@ class TriggerAlgebra
 		def resolve_rule_identifier( identifier )
 			group_id = GROUP_PATTERN.match( identifier )[1]
 			analyte_id = ANALYTE_PATTERN.match( identifier )[1]
-			Rule.where analyte_group_id: group_id, analyte_id: analyte_id
+			Rule.where( analyte_group_id: group_id, analyte_id: analyte_id )[0]
 		end
 
 		def resolve_group_identifier( identifier )

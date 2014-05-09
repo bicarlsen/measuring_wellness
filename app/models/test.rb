@@ -5,6 +5,7 @@ class Test < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :order
 	has_many :results
+	has_many :analytes, through: :results
 	has_one :consultation
 	has_many :evaluations, through: :consultation
 

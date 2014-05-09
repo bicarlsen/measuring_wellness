@@ -1,6 +1,3 @@
-require 'consultation_session'
-require 'test'
-
 class ConsultationsController < ApplicationController
 	before_action :must_be_admin, except: [ :show ]
 
@@ -41,17 +38,24 @@ class ConsultationsController < ApplicationController
 			redirect_to @consultation
 		end
 
-		success = true
-		success = false unless
-			@consultation.update_attributes consultation_edit_params 
+
+		success = 
+			(@consultation.notes = params[:consultation][:notes]) &&
+			(@consultation.published = params[:consultation][:published])	
+
+		#success = true
+		#success = false unless
+		#	@consultation.update_attributes consultation_edit_params 
 			
+
+
 		params[:consultation][:evaluation].each do |id, e_fields|
 			evaluation = Evaluation.find id
 			success = false unless 
 				evaluation.update_attribute :notes, e_fields[:notes]
 		end
 
-		if success
+		if success && @consultation.save
 			flash[:success] = "The Consultation was updated!"
 			redirect_to tests_path
 

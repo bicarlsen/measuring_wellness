@@ -3,14 +3,16 @@ class ConsultationSession
 	attr_reader :flags
 	attr_reader :recommendations
 
-	def initialize( test )
+	def initialize( test = nil )
 		@test = test
 		@results = {}
 		@flags = {}
 		@recommendations = {}
 
-		@test.results.each do |result|
-			@results[result.analyte_id] = result.amount
+		if @test
+			@test.results.each do |result|
+				@results[result.analyte_id] = result.amount
+			end
 		end
 	end
 
