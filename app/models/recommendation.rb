@@ -7,7 +7,8 @@ class Recommendation < ActiveRecord::Base
 	has_many :evaluations
 
 	# Validations
-	validates :name, presence: true, uniqueness: true
+	validates :name, presence: true
+	validate	:unique_name_among_nonarchived
 	validates :active, presence: true
 	validates :summary, presence: true
 	validates :description, presence: true
@@ -48,5 +49,15 @@ class Recommendation < ActiveRecord::Base
 
 			return true
 		end 
+
+		def unique_name_among_nonarchived
+			active_recs = Recommendation.where( archived: false )
+			active_recs.each do |rec|
+				if rec.name == self.name
+					errors.add :name, "A Recommendation with that Name already exists."
+					return
+				end
+			end
+		end
 
 end
