@@ -176,7 +176,7 @@ class TestsController < ApplicationController
 				orders = user.orders
 
 			end
-			orders = orders.delete_if { |order| !order.test.nil? 
+			orders = orders.delete_if { |order| !order.test.nil? }
 
 			arr = []
 			orders.each do |o|
