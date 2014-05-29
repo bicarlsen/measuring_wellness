@@ -24,7 +24,7 @@ class TestsController < ApplicationController
 
 		@results = []
 		Analyte.all.each do |a|
-			@results << @test.results.build( analyte_id: a.id, amount: 0 )
+			@results << @test.results.build( analyte_id: a.id )
 		end
 	end
 
@@ -64,7 +64,7 @@ class TestsController < ApplicationController
 		params[:results].each do |result| 
 			@results.delete_if do |r|
 				( r.analyte_id == result[:analyte_id].to_i ) &&
-				( result[:not_tested] || result[:amount].empty? )
+				( result[:amount].empty? )
 			end
 		end
 

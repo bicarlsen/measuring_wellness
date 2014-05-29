@@ -1,6 +1,4 @@
 class Flag < ActiveRecord::Base
-	ANALYTE_PATTERN = Regexp.new 'Analyte\(\d+\)'	
-
 	# Callbacks
 	after_initialize { self.archived ||= false }
 
@@ -13,8 +11,14 @@ class Flag < ActiveRecord::Base
 
 	# Evaluation Functions
 	def triggered?( test )
-		algebra = TriggerAlgebra.new test
-		algebra.triggered? self.trigger
+		if has_required_analytes?( test )
+			algebra = TriggerAlgebra.new test
+			algebra.triggered? self.trigger
+		
+		else
+			false
+
+		end
 	end
 
 	def calculate_severity( test )
@@ -22,9 +26,16 @@ class Flag < ActiveRecord::Base
 		return severity if severity.is_a? Numeric
 
 		# Severity is an equation
-		algebra = TriggerAlgebra.new test
-		algebra.evaluate_expression self.severity
+		if has_required_analytes?( test )
+			algebra = TriggerAlgebra.new test
+			algebra.evaluate_expression self.severity
+
+		else
+			false
+
+		end
 	end
+
 
 	private
 
@@ -36,6 +47,20 @@ class Flag < ActiveRecord::Base
 					return
 				end
 			end
+		end
+
+		def has_required_analytes?( test ) 
+			req_analytes = TriggerAlgebra.required_analytes self.trigger
+			test_analytes = []
+			test.results.each do |result|
+				test_analytes.push result.analyte_id
+			end
+
+			req_analytes.each do |analyte|
+				return false unless test_analytes.include? analyte
+			end
+
+			true # Test has all required Analytes
 		end
 
 end

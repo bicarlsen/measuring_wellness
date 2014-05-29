@@ -20,7 +20,7 @@ MeasuringWellness::Application.routes.draw do
 	resources :evaluations, path: 'admin/evaluation', 
 		except: [ :index ]
 	resources :consultations, path: 'admin/consultation', 
-		only: [ :show, :edit, :update, :destroy ]
+		only: [ :edit, :update, :destroy ]
 
 	# Root
  	root 'home_pages#index'	
@@ -41,7 +41,9 @@ MeasuringWellness::Application.routes.draw do
 
 	# User Pages
 	match '/users/:id/profile',	to: 'users#profile',	via: 'get', as: 'profile'
-	
+	match '/consultation/:id', to: 'consultations#show', 
+		via: 'get', as: 'user_consultation'
+
 	# Admin Pages
 	match '/admin', to: 'admin#home', via: 'get'
 	match '/admin/orders', to: 'admin#orders', via: 'get'

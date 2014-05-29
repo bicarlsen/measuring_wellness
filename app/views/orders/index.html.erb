@@ -34,7 +34,7 @@
 				<% if ( order.test && 
 						( consultation = order.test.consultation ) && 
 						consultation.published? ) %>
-					<%= link_to 'Results', consultation %>
+					<%= link_to 'Results', user_consultation_path( consultation ) %>
 				<% end %>
 			</td>
 		</tr>

@@ -24,13 +24,50 @@ class TriggerAlgebra
 	def results
 		@test.results
 	end
+
+	# Class Method
+	def self.required_analytes( exp )
+		analytes = []
+
+		# Analyte matches
+		offset = 0
+		while ( match = ANALYTE_PATTERN.match( exp, offset )) do
+			id  = match[1].to_i
+			analytes.push id unless analytes.include? id
+
+			offset = match.end 0
+		end
+		
+		# Groups matches
+		offset = 0
+		while ( match = GROUP_PATTERN.match( exp, offset )) do
+			group = AnalyteGroup.find match[1]
+			group.analytes.each do | analyte |
+				analytes.push analyte.id unless analytes.include? analyte.id
+			end
+
+			offset = match.end 0
+		end
+		
+		# Rule matches
+		offset = 0
+		while ( match = RULE_PATTERN.match( exp, offset )) do
+			id = match[2].to_i
+			analytes.push id unless analytes.include? id
+
+			offset = match.end 0
+		end
+
+		return analytes
+	end
 	
-#	private
+	private
+		
 		EQUALITY_PATTERN = Regexp.new '>=|<=|!=|>|<|=='
 	
 		#--- Object Patterns ---
 		ANALYTE_PATTERN = Regexp.new 'Analyte\((\d+)\)'
-		GROUP_PATTERN 	= Regexp.new 'Group\((\d+)\)'
+		GROUP_PATTERN 	= Regexp.new "Group\\((\\d+)\\)(?!\\.#{ANALYTE_PATTERN})"
 		RULE_PATTERN  = Regexp.new "#{GROUP_PATTERN}.#{ANALYTE_PATTERN}"
 
 		IDENTIFIER_PATTERN = Regexp.new(
